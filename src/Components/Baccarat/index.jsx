@@ -48,6 +48,7 @@ const initialState = {
 };
 const cardOffsets =[];
 const selectedWager = [];
+
 class Baccarat extends Component {
     
     constructor(){

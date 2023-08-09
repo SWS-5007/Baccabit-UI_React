@@ -1,34 +1,37 @@
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
-import React, { useState, useEffect } from 'react';
-import { Loader } from './Components/Baccarat/Loader';
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Loader } from "./Components/Baccarat/Loader";
 import Baccarat from "./Components/Baccarat";
-import './App.css'
+import { SignIn } from "./Components/SignIn";
+
+import "./App.css";
 
 const App = () => {
-    const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        // Simulating an async operation
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 6000);
-      }, []);
+  useEffect(() => {
+    // Simulating an async operation
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 6000);
+  }, []);
 
   return (
-
-
-    <div className='app'>
-      {/* <Router>
+    <div className="app">
+      <BrowserRouter>
         <Routes>
-          <Route path='/game' element={<Baccarat />} />
+          <Route exact path="/" element={<SignIn />} />
+          <Route path="/baccarat" element={<Baccarat />} />
         </Routes>
-      </Router> */}
-       {isLoading ? <Loader /> : <Baccarat />}
-      
+      </BrowserRouter>
     </div>
-    
- 
   );
 };
 export default App;
