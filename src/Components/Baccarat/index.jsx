@@ -114,9 +114,15 @@ class Baccarat extends Component {
     // Set your desired scaling and translation values here
     const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
     const translateX = (innerWidth - 1920 * scale) / 2;
-    const translateY = (innerHeight - 1080 * scale) / 2;
+    const translateY = (innerHeight - 1080 * scale * scale) / 2;
 
-    this.setState({ scale, translateX, translateY });
+    console.log(innerWidth, innerHeight);
+
+    this.setState({
+      scale,
+      translateX: translateX / scale,
+      translateY: translateY / scale,
+    });
   };
 
   componentDidMount() {

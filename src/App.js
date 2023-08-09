@@ -29,7 +29,7 @@ const App = () => {
         <Route exact path="/" element={<SignIn />} />
         <Route path="/baccarat" element={<Baccarat />} />
       </Routes>
-      {/* <SignIn /> */}
+      {/* {isLoading ? <Loader /> : <Baccarat />} */}
     </div>
   );
 };
