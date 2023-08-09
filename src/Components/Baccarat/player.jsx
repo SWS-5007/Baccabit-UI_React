@@ -1,8 +1,8 @@
 import React from "react"
-// import card1 from "../../../public/assets/10.svg"
-// import card2 from "../../../public/assets/back.svg"
-import playerText from "../../../public/assets/player.png"
-import hidden from "../../../public/assets/cards/hidden.png"
+// import card1 from "../../assets/10.svg"
+// import card2 from "../../assets/back.svg"
+import playerText from "../../assets/player.png"
+import hidden from "../../assets/cards/hidden.png"
 
 function Player() {
     return (

@@ -1,7 +1,7 @@
 import React from "react"
-import user1 from "../../../public/assets/user-1.png"
-import user2 from "../../../public/assets/user-2.png"
-import user3 from "../../../public/assets/user-3.png"
+import user1 from "../../assets/user-1.png"
+import user2 from "../../assets/user-2.png"
+import user3 from "../../assets/user-3.png"
 
 function Chat() {
     return (

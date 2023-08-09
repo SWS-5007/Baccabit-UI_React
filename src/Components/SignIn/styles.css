@@ -1,0 +1,30 @@
+.signin-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 100vh;
+
+  background: url(../../../public/assets/home-bg.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.signin-titleword {
+  color: #ffb30e;
+  /* -webkit-text-stroke: 3px black; */
+  text-shadow: 5px 0px #05090a, 0 6px #05090a, -6px 0 #05090a, 0 -5px #05090a;
+  /* text-shadow: 5px 0 #05090a, -5px 0 #05090a, 0 5px #05090a, 0 -5px #05090a,
+    1px 1px #05090a, -1px -1px #05090a, 1px -1px #05090a, -1px 1px #05090a; */
+  font-size: 48px;
+  font-family: Eight_Bit_Dragon;
+}
+
+.singin-betbwbword {
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
+  color: white;
+  font-family: Eight_Bit_Dragon;
+}

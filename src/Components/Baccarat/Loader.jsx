@@ -1,11 +1,10 @@
-import React from 'react'
-import video from '../../../public/vedios/bbs_anim.gif';
-import './loader.css'
+import React from "react";
+import "./loader.css";
 
 export const Loader = () => {
   return (
-    <div className='loader-wrap'>
- <img src={video} />
-   </div>
-  )
-}
+    <div className="loader-wrap">
+      <img src={process.env.PUBLIC_URL + "/vedios/bbs_anim.gif"} />
+    </div>
+  );
+};

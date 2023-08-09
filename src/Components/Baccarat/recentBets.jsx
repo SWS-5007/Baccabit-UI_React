@@ -1,5 +1,5 @@
 import React from "react"
-import dollar from "../../../public/assets/wallet-dollar-old.png"
+import dollar from "../../assets/wallet-dollar-old.png"
 
 
 function RecentBets() {

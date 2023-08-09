@@ -25,12 +25,11 @@ const App = () => {
 
   return (
     <div className="app">
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<SignIn />} />
-          <Route path="/baccarat" element={<Baccarat />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<SignIn />} />
+        <Route path="/baccarat" element={<Baccarat />} />
+      </Routes>
+      {/* <SignIn /> */}
     </div>
   );
 };

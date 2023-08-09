@@ -1,8 +1,8 @@
 import React from "react"
-import doller from "../../../public/assets/wallet-dollar-old.png"
-import bicon from "../../../public/assets/b-icon.png"
-import ticon from "../../../public/assets/t-icon.png"
-import picon from "../../../public/assets/p-icon.png"
+import doller from "../../assets/wallet-dollar-old.png"
+import bicon from "../../assets/b-icon.png"
+import ticon from "../../assets/t-icon.png"
+import picon from "../../assets/p-icon.png"
 
 function Wallet(props) {
     return (

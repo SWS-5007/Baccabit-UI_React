@@ -1,8 +1,8 @@
 import React from "react"
-// import card1 from "../../../public/assets/Q.svg"
-// import card2 from "../../../public/assets/back.svg"
-import bankerText from "../../../public/assets/banker.png"
-import hidden from "../../../public/assets/cards/hidden.png"
+// import card1 from "../../assets/Q.svg"
+// import card2 from "../../assets/back.svg"
+import bankerText from "../../assets/banker.png"
+import hidden from "../../assets/cards/hidden.png"
 
 function Banker() {
     return (
