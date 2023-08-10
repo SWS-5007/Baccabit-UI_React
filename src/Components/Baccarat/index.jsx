@@ -109,20 +109,39 @@ class Baccarat extends Component {
     this.clearBet = this.clearBet.bind(this);
   }
 
+  // handleWindowResize = () => {
+  //   const { innerWidth, innerHeight } = window;
+
+  //   const baccaratComponent = document.querySelector(".baccarat");
+
+  //   // Calculate the aspect ratio of the baccaratComponent
+  //   const componentWidth = baccaratComponent.offsetWidth;
+  //   const componentHeight = baccaratComponent.offsetHeight;
+  //   const aspectRatio = componentWidth / componentHeight;
+
+  //   // Set the component's initial scale based on the aspect ratio
+  //   let scale = 1;
+
+  //   // Determine whether to scale based on width or height
+  //   if (innerWidth / innerHeight > aspectRatio) {
+  //     scale = innerHeight / componentHeight;
+  //   } else {
+  //     scale = innerWidth / componentWidth;
+  //   }
+
+  //   this.setState({
+  //     scale,
+  //   });
+  // };
+
   handleWindowResize = () => {
     const { innerWidth, innerHeight } = window;
     // Set your desired scaling and translation values here
     const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
     const translateX = (innerWidth - 1920 * scale) / 2;
-    const translateY = (innerHeight - 1080 * scale * scale) / 2;
+    const translateY = (innerHeight - 1080 * scale) / 2;
 
-    console.log(innerWidth, innerHeight);
-
-    this.setState({
-      scale,
-      translateX: translateX / scale,
-      translateY: translateY / scale,
-    });
+    this.setState({ scale, translateX, translateY });
   };
 
   componentDidMount() {
@@ -901,17 +920,27 @@ class Baccarat extends Component {
     return (
       <div>
         <div className="baccarat-view">
-          <div className="">
-            {/* style={{ transform: `scale(${scale}) translate(${translateX}px, ${translateY}px)` }} */}
+          <div className="baccarat-parent">
             <div
               className="baccarat"
               style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
                 transform: `${
                   window.innerWidth <= 1536
-                    ? `scale(${scale}) translate(${translateX}px, ${translateY}px)`
+                    ? `scale(${scale}) translate(-50%, -50%)`
                     : "none"
                 }`,
               }}
+
+              // style={{
+              //   transform: `${
+              //     window.innerWidth <= 1536
+              //       ? `scale(${scale}) translate(${translateX}px, ${translateY}px)`
+              //       : "none"
+              //   }`,
+              // }}
             >
               <div className="baccarat-wrapper">
                 <div id="chip-container"></div>

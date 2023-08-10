@@ -1054,9 +1054,9 @@ input[type="checkbox"]:checked + label i {
  *
  *******************************************/
 @media only screen and (max-width: 767px) {
-    .baccarat-view{
-        background: none !important;
-    }
+  .baccarat-view {
+    /* background: none !important; */
+  }
   #Head {
     padding-top: 20px;
     padding-bottom: 15px;
