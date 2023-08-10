@@ -30,14 +30,14 @@ export const SignIn = () => {
           width={70}
         />
 
-        <span className="signin-titleword robotoFF">Baccabit</span>
+        <span className="signin-titleword ">Baccabit</span>
       </div>
 
-      <p className="singin-betbwbword robotoFF">
+      <p className="singin-betbwbword ">
         Bet Bigger with <span style={{ color: "#FFB30E" }}>Baccabit.</span>
       </p>
 
-      <button className="signin-mmbutton robotoFF">
+      <button className="signin-mmbutton ">
         <img
           src={process.env.PUBLIC_URL + "/assets/metamask.png"}
           width={20}
@@ -46,10 +46,7 @@ export const SignIn = () => {
         Sign in with Metamask
       </button>
 
-      <button
-        className="signin-glbutton robotoFF"
-        onClick={() => navigateToBaccarat()}
-      >
+      <button className="signin-glbutton " onClick={() => navigateToBaccarat()}>
         <img
           src={process.env.PUBLIC_URL + "/assets/google.png"}
           width={20}
