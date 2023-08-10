@@ -30,33 +30,14 @@ export const SignIn = () => {
           width={70}
         />
 
-        <span className="signin-titleword">Baccabit</span>
+        <span className="signin-titleword robotoFF">Baccabit</span>
       </div>
 
-      <p className="singin-betbwbword">
+      <p className="singin-betbwbword robotoFF">
         Bet Bigger with <span style={{ color: "#FFB30E" }}>Baccabit.</span>
       </p>
 
-      {/* <img
-        src={process.env.PUBLIC_URL + "/assets/Bet-bigger-with-Baccabit.png"}
-        width={200}
-        alt="Bet bigger with Baccabit"
-      /> */}
-
-      <button
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          backgroundColor: "#090F10",
-          color: "white",
-          border: "5px solid #090D0E",
-          borderRadius: "20px",
-          fontSize: "12px",
-          fontFamily: "Eight_Bit_Dragon",
-          padding: "0px 20px",
-        }}
-      >
+      <button className="signin-mmbutton robotoFF">
         <img
           src={process.env.PUBLIC_URL + "/assets/metamask.png"}
           width={20}
@@ -66,19 +47,8 @@ export const SignIn = () => {
       </button>
 
       <button
+        className="signin-glbutton robotoFF"
         onClick={() => navigateToBaccarat()}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          backgroundColor: "#090F10",
-          color: "white",
-          border: "5px solid #090D0E",
-          borderRadius: "20px",
-          fontFamily: "Eight_Bit_Dragon",
-          fontSize: "12px",
-          padding: "0px 20px",
-        }}
       >
         <img
           src={process.env.PUBLIC_URL + "/assets/google.png"}

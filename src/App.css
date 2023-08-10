@@ -216,20 +216,20 @@ div#chip-container img {
   top: 54%;
 }
 .action-bg:after {
-    content: "";
-    height: calc(100% + 16px);
-    width: calc(100% - 109px);
-    position: absolute;
-    top: -5px;
-    background: #061216;
-    z-index: 0;
-    pointer-events: none;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
+  content: "";
+  height: calc(100% + 16px);
+  width: calc(100% - 109px);
+  position: absolute;
+  top: -5px;
+  background: #061216;
+  z-index: 0;
+  pointer-events: none;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 .action-bg button {
-    z-index: 5;
+  z-index: 5;
 }
 .action-bg button {
   background: transparent;
@@ -787,13 +787,17 @@ i#bankerDivPosition {
   } 
 } */
 
-div#coins-container .currency-btn1+.currency-btn1{
+div#coins-container .currency-btn1 + .currency-btn1 {
   margin-left: 5px;
 }
-div#coins-container .currency-btn1+.currency-btn1+.currency-btn1{
+div#coins-container .currency-btn1 + .currency-btn1 + .currency-btn1 {
   margin-left: 10px;
 }
-div#coins-container .currency-btn1+.currency-btn1+.currency-btn1+.currency-btn1{
+div#coins-container
+  .currency-btn1
+  + .currency-btn1
+  + .currency-btn1
+  + .currency-btn1 {
   margin-left: 15px;
 }
 /* div#coins-container .currency-btn1:nth-child(4){
@@ -818,14 +822,17 @@ div#coins-container .currency-btn1:nth-child(10){
   margin-left: 50px;
 } */
 
-
-div#coins-container .currency-btn2+.currency-btn2{
+div#coins-container .currency-btn2 + .currency-btn2 {
   margin-left: 5px;
 }
-div#coins-container .currency-btn2+.currency-btn2+.currency-btn2{
+div#coins-container .currency-btn2 + .currency-btn2 + .currency-btn2 {
   margin-left: 10px;
 }
-div#coins-container .currency-btn2+.currency-btn2+.currency-btn2+.currency-btn2{
+div#coins-container
+  .currency-btn2
+  + .currency-btn2
+  + .currency-btn2
+  + .currency-btn2 {
   margin-left: 15px;
 }
 /* div#coins-container .currency-btn2:nth-child(4){
@@ -850,14 +857,17 @@ div#coins-container .currency-btn2:nth-child(10){
   margin-left: 50px;
 } */
 
-
-div#coins-container .currency-btn3+.currency-btn3{
+div#coins-container .currency-btn3 + .currency-btn3 {
   margin-left: 5px;
 }
-div#coins-container .currency-btn3+.currency-btn3+.currency-btn3{
+div#coins-container .currency-btn3 + .currency-btn3 + .currency-btn3 {
   margin-left: 10px;
 }
-div#coins-container .currency-btn3+.currency-btn3+.currency-btn3+.currency-btn3{
+div#coins-container
+  .currency-btn3
+  + .currency-btn3
+  + .currency-btn3
+  + .currency-btn3 {
   margin-left: 15px;
 }
 /* div#coins-container .currency-btn3:nth-child(4){
@@ -901,4 +911,8 @@ div#coins-container .currency-btn3:nth-child(10){
   .baccarat-card-grid {
     margin-top: 0px;
   }
+}
+
+.robotoFF {
+  font-family: "Roboto Mono", monospace;
 }

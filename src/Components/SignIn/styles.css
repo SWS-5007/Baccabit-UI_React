@@ -12,6 +12,32 @@
   background-position: center;
 }
 
+.signin-mmbutton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(9, 15, 16);
+  color: white;
+  border: 5px solid rgb(9, 13, 14);
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: Eight_Bit_Dragon;
+  padding: 0px 20px;
+}
+
+.signin-glbutton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(9, 15, 16);
+  color: white;
+  border: 5px solid rgb(9, 13, 14);
+  border-radius: 20px;
+  font-family: Eight_Bit_Dragon;
+  font-size: 12px;
+  padding: 0px 20px;
+}
+
 .signin-titleword {
   color: #ffb30e;
   /* -webkit-text-stroke: 3px black; */
@@ -19,12 +45,10 @@
   /* text-shadow: 5px 0 #05090a, -5px 0 #05090a, 0 5px #05090a, 0 -5px #05090a,
     1px 1px #05090a, -1px -1px #05090a, 1px -1px #05090a, -1px 1px #05090a; */
   font-size: 48px;
-  font-family: Eight_Bit_Dragon;
 }
 
 .singin-betbwbword {
   text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
     2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
   color: white;
-  font-family: Eight_Bit_Dragon;
 }
