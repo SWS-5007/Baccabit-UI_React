@@ -62,13 +62,16 @@ function Action(props) {
       </div>
 
       <div className="action-wrapper">
-        <div className="action-bg">
+        <div id="coins-container"></div>
+
+        <div id="action-bg" className="action-bg">
           <button className="btn-1">
             <div className="single">
               <span>P PAIR</span>
               <span>11:1</span>
             </div>
           </button>
+
           <button
             className={"btn-2 " + props.playerWinner}
             onClick={props.playerDrop}
@@ -84,6 +87,7 @@ function Action(props) {
             <i id="playerDivPosition"></i>
             {props.playerWinner && <h3>Winner</h3>}
           </button>
+
           <button
             className={"btn-3 " + props.gameTied}
             onClick={props.tieDrop}
@@ -99,6 +103,7 @@ function Action(props) {
             <i id="tieDivPosition"></i>
             {props.gameTied && <h3>Winner</h3>}
           </button>
+
           <button
             className={"btn-4 " + props.bankerWinner}
             onClick={props.bankerDrop}
@@ -114,6 +119,7 @@ function Action(props) {
             <i id="bankerDivPosition"></i>
             {props.bankerWinner && <h3>Winner</h3>}
           </button>
+
           <button className="btn-5">
             <div className="single">
               <span>B PAIR</span>

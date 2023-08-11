@@ -157,6 +157,7 @@ class Baccarat extends Component {
   }
 
   getPos(el) {
+    console.log(el, "ggggggggggg");
     for (
       var lx = 0, ly = 0;
       el !== null;
@@ -206,26 +207,18 @@ class Baccarat extends Component {
       wagerCircleDiv = "bankerDivPosition";
     }
 
-    const actionBgDiv = document.getElementById("action-bg");
-    const actionBgDivRect = actionBgDiv.getBoundingClientRect();
-
     var itm = document.getElementById(this.state.coinType);
-    const itmRect = itm.getBoundingClientRect();
-
-    const xOffset1 = (itmRect.left - actionBgDivRect.left) / this.state.scale;
-    const yOffset1 = (itmRect.top - actionBgDivRect.top) / this.state.scale;
-
     this.setState({
       clearBtnShow: "show",
     });
-    // var coinOffset = this.getPos(itm);
+    var coinOffset = this.getPos(itm);
 
     var cln = itm.cloneNode(true); // creating clone
     cln.id = "";
     cln.style.position = "absolute";
     cln.style.opacity = 0.8;
-    cln.style.left = xOffset1 + "px";
-    cln.style.top = yOffset1 + "px";
+    cln.style.left = coinOffset.x + "px";
+    cln.style.top = coinOffset.y + "px";
     cln.style.zIndex = 99999;
 
     if (wagerType === "tie-coordinates") {
@@ -237,23 +230,12 @@ class Baccarat extends Component {
     }
 
     var innerDiv = document.getElementById("coins-container");
+
     innerDiv.insertBefore(cln, innerDiv.firstChild);
 
-    // var offsets = this.getPos(document.getElementById(wagerCircleDiv));
+    var offsets = this.getPos(document.getElementById(wagerCircleDiv));
 
-    const targetDiv = document.getElementById(wagerCircleDiv);
-    const targetRect = targetDiv.getBoundingClientRect();
-
-    const xOffset2 =
-      (targetRect.left - actionBgDivRect.left) / this.state.scale;
-    const yOffset2 = (targetRect.top - actionBgDivRect.top) / this.state.scale;
-
-    const newOffsets = {
-      x: xOffset2,
-      y: yOffset2,
-    };
-
-    this.animate(newOffsets, cln); // applying animate functionality
+    this.animate(offsets, cln); // applying animate functionality
 
     if (wagerType === "player-coordinates") {
       this.setState({
@@ -945,8 +927,11 @@ class Baccarat extends Component {
                 position: "absolute",
                 top: "50%",
                 left: "50%",
-                // transform: `${`scale(${scale}) translate(-50%, -50%)`}`,
-                transform: `${`scale(${scale}) translate(-50%, -50%)`}`,
+                transform: `${
+                  window.innerWidth <= 1536
+                    ? `scale(${scale}) translate(-50%, -50%)`
+                    : "none"
+                }`,
               }}
 
               // style={{
@@ -959,7 +944,7 @@ class Baccarat extends Component {
             >
               <div className="baccarat-wrapper">
                 <div id="chip-container"></div>
-                {/* <div id="coins-container"></div> */}
+                <div id="coins-container"></div>
                 <RecentBets />
                 <div className="baccarat-card-grid">
                   <Player />
