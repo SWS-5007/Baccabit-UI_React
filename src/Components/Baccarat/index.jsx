@@ -280,14 +280,23 @@ class Baccarat extends Component {
   }
 
   showAllCards(i, thirdCardType = "both") {
+    const baccaratDiv = document.getElementById("baccarat");
+    const baccaratDivRect = baccaratDiv.getBoundingClientRect();
+
     var divToMove = document.getElementById("firstCard");
-    var cardOffset = this.getPos(divToMove);
+    // var cardOffset = this.getPos(divToMove);
+    const cardOffset = divToMove.getBoundingClientRect();
+
+    const xOffset1 =
+      (cardOffset.left - baccaratDivRect.left) / this.state.scale;
+    const yOffset1 = (cardOffset.top - baccaratDivRect.top) / this.state.scale;
+
     var cln = divToMove.cloneNode(true); // creating clone
     cln.id = "card-" + i;
     cln.style.position = "absolute";
     cln.style.opacity = 0.8;
-    cln.style.left = cardOffset.x + "px";
-    cln.style.top = cardOffset.y + "px";
+    cln.style.left = xOffset1 + "px";
+    cln.style.top = yOffset1 + "px";
     cln.style.zIndex = 99999;
 
     var innerDiv = document.getElementById("chip-container");
@@ -312,8 +321,20 @@ class Baccarat extends Component {
 
     var offsets = this.getPos(document.getElementById(cardType));
 
-    this.animate(offsets, cln); // applying animate functionality
-    cardOffsets.push(offsets);
+    const targetDiv = document.getElementById(cardType);
+    const targetRect = targetDiv.getBoundingClientRect();
+
+    const xOffset2 =
+      (targetRect.left - baccaratDivRect.left) / this.state.scale;
+    const yOffset2 = (targetRect.top - baccaratDivRect.top) / this.state.scale;
+
+    const newOffsets = {
+      x: xOffset2,
+      y: yOffset2,
+    };
+
+    this.animate(newOffsets, cln); // applying animate functionality
+    cardOffsets.push(newOffsets);
   }
 
   updatePlayerScore(n) {
@@ -847,11 +868,12 @@ class Baccarat extends Component {
       600
     );
   }
+
   clearBet() {
-    console.log("cleaaaaaaaaaaa");
     var innerDiv = document.getElementById("coins-container");
     innerDiv.innerHTML = "";
   }
+
   reset() {
     this.setState({
       playerScore: 0,
@@ -940,6 +962,7 @@ class Baccarat extends Component {
         <div className="baccarat-view">
           <div className="baccarat-parent">
             <div
+              id="baccarat"
               className="baccarat"
               style={{
                 position: "absolute",
