@@ -422,8 +422,11 @@ button.btn-5 {
 
 i#tieDivPosition {
   position: absolute;
-  left: -15%;
-  bottom: 75px;
+  width: 40px;
+  height: 40px;
+  bottom: 45px;
+  /* left: -15%; */
+  /* bottom: 75px; */
 }
 
 i#playerDivPosition {
