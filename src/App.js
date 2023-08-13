@@ -7,6 +7,8 @@ import {
   useLocation,
 } from "react-router-dom";
 
+import { NewBaccarat } from "./Pages";
+
 import { Loader } from "./Components/Baccarat/Loader";
 import Baccarat from "./Components/Baccarat";
 import { SignIn } from "./Components/SignIn";
@@ -26,8 +28,9 @@ const App = () => {
   return (
     <div className="app">
       <Routes>
-        <Route exact path="/" element={<SignIn />} />
+        {/* <Route exact path="/" element={<SignIn />} /> */}
         <Route path="/baccarat" element={<Baccarat />} />
+        <Route path="/" element={<NewBaccarat />} />
       </Routes>
       {/* {isLoading ? <Loader /> : <Baccarat />} */}
     </div>
