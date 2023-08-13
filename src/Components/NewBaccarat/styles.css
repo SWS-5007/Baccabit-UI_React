@@ -1,0 +1,10 @@
+.newbaccarat-wrapper {
+  height: 100vh;
+  background-color: #770314 !important;
+  box-shadow: inset 0px 0px 400px 100px rgba(0, 0, 0, 0.65);
+  background: url(../../assets/items/baccabit_1.png);
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}

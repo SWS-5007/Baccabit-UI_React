@@ -1145,7 +1145,7 @@ input[type="checkbox"]:checked + label i {
 
 body {
   padding: 0px !important;
-  background: #0a242c !important;
+  /* background: #0a242c !important; */
 }
 /* div#coins-container {
   position: absolute;
