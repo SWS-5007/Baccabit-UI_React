@@ -11,26 +11,28 @@
 
 .newbaccarat {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.newbaccarat-wrapper {
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
   width: 100vw;
+  height: 100vh;
 }
 
 .newbaccarat-card-grid {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 25%;
   position: relative;
   width: 100%;
-  max-width: 900px;
   text-align: center;
+}
+
+.newbaccarat-footer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }

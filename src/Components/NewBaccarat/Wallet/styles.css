@@ -1,0 +1,69 @@
+/***************** WALLET *****************/
+
+.wallet {
+  position: relative;
+  width: 100%;
+  max-width: fit-content;
+}
+
+.wallet-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+.wallet-grid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wallet-doller img {
+  width: 50px;
+}
+
+.wallet-bet {
+  background: url(../../../assets/wallet-input.png);
+  width: 150px;
+  height: 53px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wallet-bet:hover {
+  background: url(../../../assets/wallet-input-hover.png);
+  width: 150px;
+  height: 53px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wallet-bet:focus {
+  background: url(../../../assets/wallet-input-focus.png);
+  width: 150px;
+  height: 53px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.wallet-bet h4 {
+  margin: 0;
+  font-size: 12px;
+  text-shadow: 3px 2px 3px #000;
+  padding: 0;
+  color: white;
+  font-weight: 600;
+}
+
+.wallet-bet span {
+  font-size: 14px;
+  display: block;
+  color: #ffb500;
+  text-shadow: 3px 2px 3px #000;
+}

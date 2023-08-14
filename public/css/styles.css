@@ -945,13 +945,6 @@ input[type="checkbox"]:checked + label i {
   -o-transition: all 1s ease-in-out;
 }
 
-.cardsDiv {
-  visibility: hidden;
-  display: flex;
-  justify-content: center;
-  height: 30px;
-}
-
 #cardsLocation img {
   margin: 0px auto;
 }
@@ -981,15 +974,6 @@ input[type="checkbox"]:checked + label i {
   top: -35px;
 } */
 
-.deal-btn button {
-  border: none;
-  width: 150px;
-  height: 53px;
-  background: url(../assets/wallet-input-bg.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
 .tiecurrency {
   background: transparent;
   border: none;

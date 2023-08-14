@@ -1,0 +1,61 @@
+/***************** CHAT *****************/
+
+.chat {
+  max-width: 400px;
+}
+
+.chat-list {
+  display: flex;
+  background: #00000052;
+  padding: 10px 15px;
+  border-radius: 25px;
+  gap: 10px;
+}
+
+.chat-message {
+  text-align: left;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.chat-user img {
+  width: 22px;
+}
+
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-input {
+  background: url(../../../assets/chat-input-bg.png);
+  width: 100%;
+  margin-top: 10px;
+  height: 46px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.chat-input:hover {
+  background: url(../../../assets/chat-input-bg-hover.png);
+  width: 100%;
+  margin-top: 10px;
+  height: 46px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.chat-input input {
+  background: transparent !important;
+  border: none !important;
+  width: 100% !important;
+  padding: 20px 25px !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  font-family: "Eight_Bit_Dragon" !important;
+  font-size: 10px !important;
+  color: #fff !important;
+}

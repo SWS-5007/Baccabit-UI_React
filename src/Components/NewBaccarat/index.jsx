@@ -1,7 +1,10 @@
 import React from "react";
 
-import { Banker } from "./banker";
-import { Player } from "./player";
+import Action from "./Action";
+import Banker from "./Banker";
+import Chat from "./Chat";
+import Player from "./Player";
+import Wallet from "./Wallet";
 
 import "./styles.css";
 
@@ -19,12 +22,16 @@ export const NewBaccaratComponent = () => {
           //   transform: `${`scale(${scale}) translate(-50%, -50%)`}`,
           // }}
         >
-          <div className="newbaccarat-wrapper">
-            <div id="chip-container"></div>
-            <div className="newbaccarat-card-grid">
-              <Player />
-              <Banker />
-            </div>
+          <div id="chip-container"></div>
+          <div className="newbaccarat-card-grid">
+            <Player />
+            <Banker />
+          </div>
+
+          <div className="newbaccarat-footer-grid">
+            <Wallet />
+            <Action />
+            <Chat />
           </div>
         </div>
       </div>

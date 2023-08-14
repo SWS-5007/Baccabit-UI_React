@@ -1,0 +1,56 @@
+/***************** BANKER *****************/
+
+.banker {
+  position: relative;
+  max-width: 444px;
+}
+
+.banker-cards div {
+  width: 96px;
+}
+
+.banker-text {
+  padding-bottom: 50px;
+}
+
+.banker-text img {
+  width: 100%;
+  max-width: 250px;
+}
+
+.banker-cards {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.banker-cards span:hover {
+  transform: translateY(-15px);
+}
+
+.banker-cards span {
+  background: #00000080;
+  padding: 3px 3px 8px;
+  display: block;
+  border-radius: 15px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.banker-cards img {
+  width: 100%;
+}
+.banker-cards-placeholder {
+  display: flex;
+  width: 100% !important;
+  gap: 20px;
+  /* position: absolute;
+  left: 0;
+  top: 0;
+  right: 0; */
+}
+
+.banker-cards-placeholder img {
+  width: 96px;
+  visibility: hidden;
+}

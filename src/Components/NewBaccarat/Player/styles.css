@@ -1,0 +1,53 @@
+/***************** PLAYER *****************/
+
+.player {
+  position: relative;
+  max-width: 444px;
+}
+
+.player-text img {
+  width: 100%;
+  max-width: 330px;
+}
+
+.player-cards {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.player-cards span:hover {
+  transform: translateY(-15px);
+}
+
+.player-cards span {
+  background: #00000080;
+  padding: 3px 3px 8px;
+  display: block;
+  border-radius: 15px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.player-cards img {
+  width: 100%;
+}
+
+.player-cards-placeholder {
+  display: flex;
+  width: 100% !important;
+  gap: 20px;
+  /* position: absolute;
+  left: 0;
+  top: 0;
+  right: 0; */
+}
+
+.player-cards-placeholder img {
+  width: 96px;
+  visibility: hidden;
+}
+
+div#chip-container img {
+  box-shadow: 0px 10px 7px #000;
+}
