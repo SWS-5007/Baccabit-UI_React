@@ -82,7 +82,7 @@ const Action = (props) => {
 
           <button
             className={"btn-2 " + props.baccaratState.playerWinner}
-            onClick={() => props.selectWager("player-coordinates")}
+            onClick={() => props.handleSelectWager("player-coordinates")}
             style={{ background: props.baccaratState.playerWinner }}
           >
             <div className="stats">
@@ -99,7 +99,7 @@ const Action = (props) => {
 
           <button
             className={"btn-3 " + props.baccaratState.gameTied}
-            onClick={() => props.selectWager("tie-coordinates")}
+            onClick={() => props.handleSelectWager("tie-coordinates")}
             style={{ background: props.baccaratState.gameTied }}
           >
             <div className="stats">
@@ -115,7 +115,7 @@ const Action = (props) => {
 
           <button
             className={"btn-4 " + props.baccaratState.bankerWinner}
-            onClick={() => props.selectWager("banker-coordinates")}
+            onClick={() => props.handleSelectWager("banker-coordinates")}
             style={{ background: props.baccaratState.bankerWinner }}
           >
             <div className="stats">

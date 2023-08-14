@@ -1,16 +1,13 @@
-import { useBaccaratState } from "./baccaratState";
 import { shuffleDeck, getPos } from "./actionHooks";
 import { NewBaccaratComponent } from "..";
 
 export const useGameRuleHooks = () => {
-  const BaccaratHook = useBaccaratState();
-
-  const gameRules = () => {
-    if (BaccaratHook.baccaratState.goBack) {
+  const gameRules = (baccaratState, setBaccaratState) => {
+    if (baccaratState.goBack) {
       return false;
     }
 
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       goBack: true,
     }));
@@ -24,18 +21,18 @@ export const useGameRuleHooks = () => {
     var bankerCardDisplay = false;
     //=====================Player Rules========================
     if (
-      BaccaratHook.baccaratState.playerFinalScore <= 5 ||
-      BaccaratHook.baccaratState.playerFinalScore === 10
+      baccaratState.playerFinalScore <= 5 ||
+      baccaratState.playerFinalScore === 10
     ) {
       playerDraw = true;
     } else if (
-      BaccaratHook.baccaratState.playerFinalScore <= 6 ||
-      BaccaratHook.baccaratState.playerFinalScore === 7
+      baccaratState.playerFinalScore <= 6 ||
+      baccaratState.playerFinalScore === 7
     ) {
       playerStand = true;
     } else if (
-      BaccaratHook.baccaratState.playerFinalScore <= 8 ||
-      BaccaratHook.baccaratState.playerFinalScore === 9
+      baccaratState.playerFinalScore <= 8 ||
+      baccaratState.playerFinalScore === 9
     ) {
       playerNaturalStand = true;
       playerStand = true;
@@ -43,19 +40,19 @@ export const useGameRuleHooks = () => {
 
     var i = 4;
     if (playerDraw) {
-      var deck = shuffleDeck(BaccaratHook.baccaratState.deck);
+      var deck = shuffleDeck(baccaratState.deck);
       var playerhand = [];
       playerhand.push(deck.pop());
 
-      BaccaratHook.setBaccaratState((prev) => ({
+      setBaccaratState((prev) => ({
         ...prev,
         thirdPlayerHand: playerhand,
       }));
 
-      showAllCards(i, "player");
+      showAllCards(i, baccaratState, "player");
 
       var cardObj;
-      var playerCard = BaccaratHook.baccaratState.thirdPlayerHand;
+      var playerCard = baccaratState.thirdPlayerHand;
       cardObj = playerCard[0];
       var playerThirCardValue = cardObj.v;
     }
@@ -63,7 +60,7 @@ export const useGameRuleHooks = () => {
     //=====================Banker Rules========================
 
     if (!playerNaturalStand) {
-      var bankerScore = BaccaratHook.baccaratState.bankerFinalScore;
+      var bankerScore = baccaratState.bankerFinalScore;
 
       if (bankerScore >= 0 && bankerScore <= 2) {
         bankerDraw = true;
@@ -136,16 +133,16 @@ export const useGameRuleHooks = () => {
 
       if (bankerDraw) {
         i++;
-        deck = shuffleDeck(BaccaratHook.baccaratState.deck);
+        deck = shuffleDeck(baccaratState.deck);
         var bankerhand = [];
         bankerhand.push(deck.pop());
 
-        BaccaratHook.setBaccaratState((prev) => ({
+        setBaccaratState((prev) => ({
           ...prev,
           thirdBankerHand: bankerhand,
         }));
 
-        showAllCards(i, "banker");
+        showAllCards(i, baccaratState, "banker");
       }
     }
 
@@ -156,7 +153,9 @@ export const useGameRuleHooks = () => {
           "player",
           playerDraw,
           bankerDraw,
-          bankerCardDisplay
+          bankerCardDisplay,
+          baccaratState,
+          setBaccaratState
         );
       }, 800);
     }
@@ -168,45 +167,42 @@ export const useGameRuleHooks = () => {
           "banker",
           playerDraw,
           bankerDraw,
-          bankerCardDisplay
+          bankerCardDisplay,
+          baccaratState,
+          setBaccaratState
         );
       }, 1400);
     }
 
     if (!playerDraw && !bankerDraw) {
-      calculateWinner(); // calculating winner
+      calculateWinner(baccaratState, setBaccaratState); // calculating winner
     }
   };
 
-  const calculateWinner = () => {
+  const calculateWinner = (baccaratState, setBaccaratState) => {
     setTimeout(() => {
-      if (
-        BaccaratHook.baccaratState.playerFinalScore >
-        BaccaratHook.baccaratState.bankerFinalScore
-      ) {
-        BaccaratHook.setBaccaratState((prev) => ({
+      if (baccaratState.playerFinalScore > baccaratState.bankerFinalScore) {
+        setBaccaratState((prev) => ({
           ...prev,
           playerWinner: "winner",
         }));
       } else if (
-        BaccaratHook.baccaratState.playerFinalScore <
-        BaccaratHook.baccaratState.bankerFinalScore
+        baccaratState.playerFinalScore < baccaratState.bankerFinalScore
       ) {
-        BaccaratHook.setBaccaratState((prev) => ({
+        setBaccaratState((prev) => ({
           ...prev,
           bankerWinner: "winner",
         }));
       } else if (
-        BaccaratHook.baccaratState.playerFinalScore ===
-        BaccaratHook.baccaratState.bankerFinalScore
+        baccaratState.playerFinalScore === baccaratState.bankerFinalScore
       ) {
-        BaccaratHook.setBaccaratState((prev) => ({
+        setBaccaratState((prev) => ({
           ...prev,
           gameTied: "winner",
         }));
       }
 
-      BaccaratHook.setBaccaratState((prev) => ({
+      setBaccaratState((prev) => ({
         ...prev,
         rebetBtnShow: "show",
       }));
@@ -218,9 +214,11 @@ export const useGameRuleHooks = () => {
     type,
     playerDraw,
     bankerDraw,
-    bankerCardDisplay
+    bankerCardDisplay,
+    baccaratState,
+    setBaccaratState
   ) => {
-    var playerCard = BaccaratHook.baccaratState.thirdPlayerHand;
+    var playerCard = baccaratState.thirdPlayerHand;
 
     var n = i;
 
@@ -228,7 +226,7 @@ export const useGameRuleHooks = () => {
     var playerThirCardValue = cardObj.v;
     var dimensions = getPos(document.getElementById("playerthirdCard"));
     bankerCardDisplay = false;
-    var allOffset = BaccaratHook.baccaratState.cardOffset;
+    var allOffset = baccaratState.cardOffset;
 
     if (allOffset[4]) {
       var gobackOffset = allOffset[4];
@@ -243,10 +241,12 @@ export const useGameRuleHooks = () => {
       playerDraw,
       bankerDraw,
       bankerCardDisplay,
-      gobackOffset
+      gobackOffset,
+      baccaratState,
+      setBaccaratState
     );
 
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       playerThirCardValue: playerThirCardValue,
     }));
@@ -257,16 +257,18 @@ export const useGameRuleHooks = () => {
     type,
     playerDraw,
     bankerDraw,
-    bankerCardDisplay
+    bankerCardDisplay,
+    baccaratState,
+    setBaccaratState
   ) => {
-    var bankerCard = BaccaratHook.baccaratState.thirdBankerHand;
+    var bankerCard = baccaratState.thirdBankerHand;
 
     var n = i;
     bankerCardDisplay = true;
     var cardObj = bankerCard[0];
     var bankerThirCardValue = cardObj.v;
     var dimensions = getPos(document.getElementById("bankerthirdCard"));
-    var allOffset = BaccaratHook.baccaratState.cardOffset;
+    var allOffset = baccaratState.cardOffset;
     //console.log(allOffset);
     //console.log(allOffset[4]);
     if (allOffset[5]) {
@@ -283,10 +285,12 @@ export const useGameRuleHooks = () => {
       playerDraw,
       bankerDraw,
       bankerCardDisplay,
-      gobackOffset
+      gobackOffset,
+      baccaratState,
+      setBaccaratState
     );
 
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       bankerThirCardValue: bankerThirCardValue,
     }));
@@ -301,7 +305,9 @@ export const useGameRuleHooks = () => {
     playerDraw,
     bankerDraw,
     bankerCardDisplay,
-    gobackOffset
+    gobackOffset,
+    baccaratState,
+    setBaccaratState
   ) => {
     var cardImage = document.createElement("img");
     cardImage.style.position = "absolute";
@@ -338,28 +344,28 @@ export const useGameRuleHooks = () => {
     // animate(offsets,cardImage); // applying animate functionality
 
     if (type === "player") {
-      var playerscrore = BaccaratHook.baccaratState.playerFinalScore;
+      var playerscrore = baccaratState.playerFinalScore;
       playerscrore += thirdCardScore;
-      BaccaratHook.setBaccaratState((prev) => ({
+      setBaccaratState((prev) => ({
         ...prev,
         playerFinalScore: handScore(playerscrore),
       }));
     } else {
-      var bankerscrore = BaccaratHook.baccaratState.bankerFinalScore;
+      var bankerscrore = baccaratState.bankerFinalScore;
       bankerscrore += thirdCardScore;
-      BaccaratHook.setBaccaratState((prev) => ({
+      setBaccaratState((prev) => ({
         ...prev,
         bankerFinalScore: handScore(bankerscrore),
       }));
     }
 
     if (playerDraw && bankerDraw && bankerCardDisplay) {
-      calculateWinner(); // calculating winner
+      calculateWinner(baccaratState, setBaccaratState); // calculating winner
     } else if (!playerDraw && bankerDraw && bankerCardDisplay) {
-      calculateWinner(); // calculating winner
+      calculateWinner(baccaratState, setBaccaratState); // calculating winner
     }
     if (playerDraw && !bankerDraw) {
-      calculateWinner(); // calculating winner
+      calculateWinner(baccaratState, setBaccaratState); // calculating winner
     }
     goBack(gobackOffset, cardImage, n);
   };

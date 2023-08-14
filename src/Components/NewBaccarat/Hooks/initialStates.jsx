@@ -79,3 +79,6 @@ export const initialBaccaratState = {
   translateX: 0,
   translateY: 0,
 };
+
+export const cardOffsets = [];
+export const selectedWager = [];

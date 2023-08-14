@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import $ from "jquery";
 import _ from "lodash";
 
@@ -10,16 +10,20 @@ import Wallet from "./Wallet";
 
 import "./styles.css";
 
-import { initialBaccaratState } from "./Hooks/initialStates";
-import { useBaccaratState } from "./Hooks/baccaratState";
-import { getSelectAmount, shuffleDeck, getPos } from "./Hooks/actionHooks";
+import { initialBaccaratState, cardOffsets } from "./Hooks/initialStates";
+import {
+  animate,
+  getPos,
+  getSelectAmount,
+  shuffleDeck,
+  selectWager,
+  showAllCards,
+} from "./Hooks/actionHooks";
+
 import { useGameRuleHooks } from "./Hooks/gameRuleHooks";
 
-const cardOffsets = [];
-const selectedWager = [];
-
 export const NewBaccaratComponent = () => {
-  const BaccaratHook = useBaccaratState();
+  const [baccaratState, setBaccaratState] = useState(initialBaccaratState);
   const GameRuleHook = useGameRuleHooks();
 
   const handleWindowResize = () => {
@@ -29,7 +33,7 @@ export const NewBaccaratComponent = () => {
     const translateX = (innerWidth - 1920 * scale) / 2;
     const translateY = (innerHeight - 1080 * scale) / 2;
 
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       scale: scale,
       translateX: translateX,
@@ -47,26 +51,16 @@ export const NewBaccaratComponent = () => {
 
   const handleSelectAmount = (type) => {
     const newType = getSelectAmount(type);
-
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       coinType: type,
       coinAmount: newType,
     }));
   };
 
-  const animate = (offsets, divToAnimate) => {
-    $(divToAnimate).animate({
-      left: offsets.x + "px",
-      top: offsets.y + "px",
-      position: "absolute",
-      zIndex: 99999,
-      opacity: 1,
-    });
-  };
   const getPlayerHands = (n) => {
-    var playerhand = BaccaratHook.baccaratState.player;
-    var bankerhand = BaccaratHook.baccaratState.banker;
+    var playerhand = baccaratState.player;
+    var bankerhand = baccaratState.banker;
     var cardObj;
 
     if (n === 0) {
@@ -83,7 +77,7 @@ export const NewBaccaratComponent = () => {
 
   //=============Step 1=============
   const shuffleCardsAndSetHands = () => {
-    const deck = shuffleDeck(BaccaratHook.baccaratState.deck);
+    const deck = shuffleDeck(baccaratState.deck);
     const playerhand = [];
     const bankerhand = [];
     playerhand.push(deck.pop());
@@ -92,7 +86,7 @@ export const NewBaccaratComponent = () => {
     bankerhand.push(deck.pop());
     bankerhand.push(deck.pop());
 
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       player: playerhand,
       banker: bankerhand,
@@ -104,7 +98,7 @@ export const NewBaccaratComponent = () => {
 
   //=============Step 2=============
   const openAllCards = () => {
-    const allOffset = BaccaratHook.baccaratState.cardOffset;
+    const allOffset = baccaratState.cardOffset;
     var i = 0;
     for (var key in allOffset) {
       if (allOffset.hasOwnProperty(key)) {
@@ -179,23 +173,23 @@ export const NewBaccaratComponent = () => {
       animate(obj, cardImage);
 
       if (n === 3) {
-        BaccaratHook.setBaccaratState((prev) => ({
+        setBaccaratState((prev) => ({
           ...prev,
-          playerFinalScore: handScore(BaccaratHook.baccaratState.playerScore),
-          bankerFinalScore: handScore(BaccaratHook.baccaratState.bankerScore),
+          playerFinalScore: handScore(baccaratState.playerScore),
+          bankerFinalScore: handScore(baccaratState.bankerScore),
         }));
 
-        GameRuleHook.gameRules();
+        GameRuleHook.gameRules(baccaratState, setBaccaratState);
       }
     }, 500);
   };
 
   const updatePlayerScore = (n) => {
-    var playerhand = BaccaratHook.baccaratState.player;
-    var bankerhand = BaccaratHook.baccaratState.banker;
+    var playerhand = baccaratState.player;
+    var bankerhand = baccaratState.banker;
     var cardObj;
-    var newPlayerscrore = BaccaratHook.baccaratState.playerScore;
-    var newBankerscrore = BaccaratHook.baccaratState.bankerScore;
+    var newPlayerscrore = baccaratState.playerScore;
+    var newBankerscrore = baccaratState.bankerScore;
 
     if (n === 0) {
       cardObj = playerhand[0];
@@ -211,179 +205,22 @@ export const NewBaccaratComponent = () => {
       newBankerscrore += cardObj.v;
     }
 
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       playerScore: newPlayerscrore,
       bankerScore: newBankerscrore,
     }));
   };
 
-  const selectWager = (wagerType) => {
-    if (wagerType === "player-coordinates") {
-      var wagerCircleDiv = "playerDivPosition";
-    } else if (wagerType === "tie-coordinates") {
-      wagerCircleDiv = "tieDivPosition";
-    } else if (wagerType === "banker-coordinates") {
-      wagerCircleDiv = "bankerDivPosition";
-    }
-
-    const actionBgDiv = document.getElementById("action-bg");
-    const actionBgDivRect = actionBgDiv && actionBgDiv.getBoundingClientRect();
-
-    var itm = document.getElementById(BaccaratHook.baccaratState.coinType);
-    const itmRect = itm && itm.getBoundingClientRect();
-
-    const xOffset1 =
-      (itmRect.left - actionBgDivRect.left) / BaccaratHook.baccaratState.scale;
-    const yOffset1 =
-      (itmRect.top - actionBgDivRect.top) / BaccaratHook.baccaratState.scale;
-
-    BaccaratHook.setBaccaratState((prev) => ({
-      ...prev,
-      clearBtnShow: "show",
-    }));
-
-    var cln = itm.cloneNode(true); // creating clone
-    cln.id = "";
-    cln.style.position = "absolute";
-    cln.style.opacity = 0.8;
-    cln.style.left = xOffset1 + "px";
-    cln.style.top = yOffset1 + "px";
-    cln.style.zIndex = 99999;
-
-    if (wagerType === "tie-coordinates") {
-      cln.className =
-        BaccaratHook.baccaratState.coinType + "-chip tiecurrency currency-btn1";
-    } else if (wagerType === "player-coordinates") {
-      cln.className =
-        BaccaratHook.baccaratState.coinType + "-chip currency currency-btn2";
-    } else {
-      cln.className =
-        BaccaratHook.baccaratState.coinType + "-chip currency currency-btn3";
-    }
-
-    var innerDiv = document.getElementById("coins-container");
-    innerDiv.insertBefore(cln, innerDiv.firstChild);
-
-    const targetDiv = document.getElementById(wagerCircleDiv);
-    const targetRect = targetDiv.getBoundingClientRect();
-
-    const xOffset2 =
-      (targetRect.left - actionBgDivRect.left) /
-      BaccaratHook.baccaratState.scale;
-    const yOffset2 =
-      (targetRect.top - actionBgDivRect.top) / BaccaratHook.baccaratState.scale;
-
-    const newOffsets = {
-      x: xOffset2,
-      y: yOffset2,
-    };
-
-    animate(newOffsets, cln); // applying animate functionality
-
-    if (wagerType === "player-coordinates") {
-      BaccaratHook.setBaccaratState((prev) => ({
-        ...prev,
-        playeramount:
-          BaccaratHook.baccaratState.playeramount +
-          BaccaratHook.baccaratState.coinAmount,
-      }));
-    } else if (wagerType === "tie-coordinates") {
-      BaccaratHook.setBaccaratState((prev) => ({
-        ...prev,
-        tieamount:
-          BaccaratHook.baccaratState.tieamount +
-          BaccaratHook.baccaratState.coinAmount,
-      }));
-    } else if (wagerType === "banker-coordinates") {
-      BaccaratHook.setBaccaratState((prev) => ({
-        ...prev,
-        bankeramount:
-          BaccaratHook.baccaratState.bankeramount +
-          BaccaratHook.baccaratState.coinAmount,
-      }));
-    }
-
-    var finalbet =
-      parseInt(BaccaratHook.baccaratState.betamount, 10) +
-      parseInt(BaccaratHook.baccaratState.coinAmount, 10);
-
-    selectedWager[BaccaratHook.baccaratState.coinType] = wagerType;
-
-    BaccaratHook.setBaccaratState((prev) => ({
-      ...prev,
-      betamount: finalbet,
-    }));
-  };
-
-  const showAllCards = (i, thirdCardType = "both") => {
-    const baccaratDiv = document.getElementById("newbaccarat");
-    const baccaratDivRect = baccaratDiv.getBoundingClientRect();
-
-    var divToMove = document.getElementById("firstCard");
-    const cardOffset = divToMove.getBoundingClientRect();
-
-    const xOffset1 =
-      (cardOffset.left - baccaratDivRect.left) /
-      BaccaratHook.baccaratState.scale;
-    const yOffset1 =
-      (cardOffset.top - baccaratDivRect.top) / BaccaratHook.baccaratState.scale;
-
-    var cln = divToMove.cloneNode(true); // creating clone
-    cln.id = "card-" + i;
-    cln.style.position = "absolute";
-    cln.style.opacity = 0.8;
-    cln.style.left = xOffset1 + "px";
-    cln.style.top = yOffset1 + "px";
-    cln.style.zIndex = 99999;
-
-    var innerDiv = document.getElementById("chip-container");
-    innerDiv.insertBefore(cln, innerDiv.firstChild);
-    var cardType = "";
-
-    if (thirdCardType === "both") {
-      if (i === 0) {
-        cardType = "playerfirstCard";
-      } else if (i === 1) {
-        cardType = "bankerfirstCard";
-      } else if (i === 2) {
-        cardType = "playersecondCard";
-      } else if (i === 3) {
-        cardType = "bankersecondCard";
-      }
-    } else if (thirdCardType === "player") {
-      cardType = "playerthirdCard";
-    } else if (thirdCardType === "banker") {
-      cardType = "bankerthirdCard";
-    }
-
-    const targetDiv = document.getElementById(cardType);
-    const targetRect = targetDiv.getBoundingClientRect();
-
-    const xOffset2 =
-      (targetRect.left - baccaratDivRect.left) /
-      BaccaratHook.baccaratState.scale;
-    const yOffset2 =
-      (targetRect.top - baccaratDivRect.top) / BaccaratHook.baccaratState.scale;
-
-    const newOffsets = {
-      x: xOffset2,
-      y: yOffset2,
-    };
-
-    animate(newOffsets, cln); // applying animate functionality
-    cardOffsets.push(newOffsets);
-  };
-
   const deal = () => {
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       dealBtnShow: "hide",
       rebetBtnShow: "hide",
     }));
 
     for (var i = 0; i < 4; i++) {
-      showAllCards(i);
+      showAllCards(i, baccaratState);
     }
 
     setTimeout(() => {
@@ -397,7 +234,7 @@ export const NewBaccaratComponent = () => {
   };
 
   const reset = () => {
-    BaccaratHook.setBaccaratState((prev) => ({
+    setBaccaratState((prev) => ({
       ...prev,
       playerScore: initialBaccaratState.playerScore,
       bankerScore: initialBaccaratState.bankerScore,
@@ -423,39 +260,41 @@ export const NewBaccaratComponent = () => {
     deal();
   };
 
-  return (
-    <>
-      <div className="newbaccarat-wrapper">
-        <div
-          id="newbaccarat"
-          className="newbaccarat"
-          // style={{
-          //   position: "absolute",
-          //   top: "50%",
-          //   left: "50%",
-          //   transform: `${`scale(${scale}) translate(-50%, -50%)`}`,
-          // }}
-        >
-          <div id="chip-container"></div>
-          <div className="newbaccarat-card-grid">
-            <Player />
-            <Banker />
-          </div>
+  const handleSelectWager = (wagerType) => {
+    selectWager(wagerType, baccaratState, setBaccaratState);
+  };
 
-          <div className="newbaccarat-footer-grid">
-            <Wallet />
-            <Action
-              baccaratState={BaccaratHook.baccaratState}
-              selectAmount={handleSelectAmount}
-              deal={deal}
-              rebet={rebet}
-              clearBet={clearBet}
-              selectWager={selectWager}
-            />
-            <Chat />
-          </div>
+  return (
+    <div className="newbaccarat-wrapper">
+      <div
+        id="newbaccarat"
+        className="newbaccarat"
+        // style={{
+        //   position: "absolute",
+        //   top: "50%",
+        //   left: "50%",
+        //   transform: `${`scale(${scale}) translate(-50%, -50%)`}`,
+        // }}
+      >
+        <div id="chip-container"></div>
+        <div className="newbaccarat-card-grid">
+          <Player />
+          <Banker />
+        </div>
+
+        <div className="newbaccarat-footer-grid">
+          <Wallet />
+          <Action
+            baccaratState={baccaratState}
+            selectAmount={handleSelectAmount}
+            deal={deal}
+            rebet={rebet}
+            clearBet={clearBet}
+            handleSelectWager={handleSelectWager}
+          />
+          <Chat />
         </div>
       </div>
-    </>
+    </div>
   );
 };
