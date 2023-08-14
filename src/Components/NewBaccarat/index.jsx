@@ -117,7 +117,7 @@ export const NewBaccaratComponent = () => {
   // //=============Step 3=============
   const openOneByOne = (n, obj) => {
     setTimeout(() => {
-      var cardObj = this.getPlayerHands(n); // get player cards
+      var cardObj = getPlayerHands(n); // get player cards
       if (typeof cardObj === "undefined") {
         return false;
       }

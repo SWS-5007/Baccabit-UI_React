@@ -1,6 +1,5 @@
 import { useBaccaratState } from "./baccaratState";
 import { shuffleDeck, getPos } from "./actionHooks";
-import { setTimeout } from "timers/promises";
 import { NewBaccaratComponent } from "..";
 
 export const useGameRuleHooks = () => {
@@ -325,9 +324,9 @@ export const useGameRuleHooks = () => {
     hiddenImage.setAttribute("width", "96px");
     hiddenImage.addEventListener(
       "click",
-      this.flipCards.bind(this, dimensions, cardImage, n)
+      NewBaccaratComponent.flipCards(dimensions, cardImage, n)
     );
-    
+
     var innerDiv = document.getElementById("chip-container");
     innerDiv.appendChild(cardImage);
     innerDiv.appendChild(hiddenImage);
@@ -335,8 +334,8 @@ export const useGameRuleHooks = () => {
     var offsets = getPos(document.getElementById("tieDivPosition"));
 
     // Comment this for stop animation
-    // this.animate(offsets,hiddenImage); // applying animate functionality
-    // this.animate(offsets,cardImage); // applying animate functionality
+    // animate(offsets,hiddenImage); // applying animate functionality
+    // animate(offsets,cardImage); // applying animate functionality
 
     if (type === "player") {
       var playerscrore = BaccaratHook.baccaratState.playerFinalScore;
