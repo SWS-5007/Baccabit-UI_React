@@ -418,6 +418,7 @@ class Baccarat extends Component {
     setTimeout(
       function () {
         var cardObj = this.getPlayerHands(n); // get player cards
+        console.log("cardObj", cardObj);
         if (typeof cardObj === "undefined") {
           return false;
         }

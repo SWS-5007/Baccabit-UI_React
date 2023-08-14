@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import $ from "jquery";
 import _ from "lodash";
 
@@ -60,6 +60,7 @@ export const NewBaccaratComponent = () => {
 
   const getPlayerHands = (n) => {
     var playerhand = baccaratState.player;
+    console.log("2222222222", playerhand);
     var bankerhand = baccaratState.banker;
     var cardObj;
 
@@ -85,20 +86,24 @@ export const NewBaccaratComponent = () => {
 
     bankerhand.push(deck.pop());
     bankerhand.push(deck.pop());
+    console.log("000000000", playerhand);
 
-    setBaccaratState((prev) => ({
-      ...prev,
-      player: playerhand,
-      banker: bankerhand,
-      cardOffset: cardOffsets,
-    }));
-
-    openAllCards();
+    setBaccaratState(
+      (prev) => ({
+        ...prev,
+        player: playerhand,
+        banker: bankerhand,
+        cardOffset: cardOffsets,
+      }),
+      openAllCards()
+    );
+    console.log("000000000", baccaratState.player);
   };
 
   //=============Step 2=============
   const openAllCards = () => {
-    const allOffset = baccaratState.cardOffset;
+    const allOffset = cardOffsets;
+    console.log("11111111111", cardOffsets);
     var i = 0;
     for (var key in allOffset) {
       if (allOffset.hasOwnProperty(key)) {
@@ -107,6 +112,10 @@ export const NewBaccaratComponent = () => {
       }
     }
   };
+
+  useEffect(() => {
+    openAllCards();
+  }, [baccaratState.player, baccaratState.banker]);
 
   // //=============Step 3=============
   const openOneByOne = (n, obj) => {
@@ -283,7 +292,10 @@ export const NewBaccaratComponent = () => {
         </div>
 
         <div className="newbaccarat-footer-grid">
-          <Wallet />
+          <Wallet
+            totalbet={baccaratState.betamount}
+            playerOverAllbalance={baccaratState.playerOverAllbalance}
+          />
           <Action
             baccaratState={baccaratState}
             selectAmount={handleSelectAmount}

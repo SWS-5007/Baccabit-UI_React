@@ -66,7 +66,7 @@ export const initialBaccaratState = {
     { v: 0, f: "d12" },
     { v: 0, f: "d13" },
   ],
-  cardOffset: "",
+  cardOffset: [],
   playerOverAllbalance: 1000,
   dealBtnShow: "show",
   clearBtnShow: "hide",
@@ -78,6 +78,8 @@ export const initialBaccaratState = {
   scale: 1,
   translateX: 0,
   translateY: 0,
+  player: [],
+  banker: [],
 };
 
 export const cardOffsets = [];
