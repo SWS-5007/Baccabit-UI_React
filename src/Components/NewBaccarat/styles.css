@@ -8,3 +8,29 @@
   background-position: center;
   background-repeat: no-repeat;
 }
+
+.newbaccarat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.newbaccarat-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100vw;
+}
+
+.newbaccarat-card-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
