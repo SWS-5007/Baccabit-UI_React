@@ -16,19 +16,21 @@ const Action = (props) => {
   return (
     <div className="action">
       <div className="act-buttons-div">
-        <div className={"deal-btn " + props.dealBtnShow}>
+        <div className={"deal-btn " + props.baccaratState.dealBtnShow}>
           <button type="button" onClick={props.deal}>
             Deal
           </button>
         </div>
 
-        <div className={"deal-btn clear-bet " + props.clearBtnShow}>
+        <div
+          className={"deal-btn clear-bet " + props.baccaratState.clearBtnShow}
+        >
           <button type="button" onClick={props.clearBet}>
             Clear Bet
           </button>
         </div>
 
-        <div className={"deal-btn " + props.rebetBtnShow}>
+        <div className={"deal-btn " + props.baccaratState.rebetBtnShow}>
           <button type="button" onClick={props.rebet}>
             Rebet
           </button>
@@ -79,25 +81,26 @@ const Action = (props) => {
           </button>
 
           <button
-            className={"btn-2 " + props.playerWinner}
-            onClick={props.playerDrop}
-            style={{ background: props.playerWinner }}
+            className={"btn-2 " + props.baccaratState.playerWinner}
+            onClick={() => props.selectWager("player-coordinates")}
+            style={{ background: props.baccaratState.playerWinner }}
           >
             <div className="stats">
               <span>$ 0.00</span>
               <span>
-                <img src={userplayer} alt="" /> {props.playerFinalScore}
+                <img src={userplayer} alt="" />{" "}
+                {props.baccaratState.playerFinalScore}
               </span>
             </div>
             <p>PLAYER</p>
             <i id="playerDivPosition"></i>
-            {props.playerWinner && <h3>Winner</h3>}
+            {props.baccaratState.playerWinner && <h3>Winner</h3>}
           </button>
 
           <button
-            className={"btn-3 " + props.gameTied}
-            onClick={props.tieDrop}
-            style={{ background: props.gameTied }}
+            className={"btn-3 " + props.baccaratState.gameTied}
+            onClick={() => props.selectWager("tie-coordinates")}
+            style={{ background: props.baccaratState.gameTied }}
           >
             <div className="stats">
               <span>$ 0.00</span>
@@ -107,23 +110,24 @@ const Action = (props) => {
             </div>
             <p>TIE 8:1</p>
             <i id="tieDivPosition"></i>
-            {props.gameTied && <h3>Winner</h3>}
+            {props.baccaratState.gameTied && <h3>Winner</h3>}
           </button>
 
           <button
-            className={"btn-4 " + props.bankerWinner}
-            onClick={props.bankerDrop}
-            style={{ background: props.bankerWinner }}
+            className={"btn-4 " + props.baccaratState.bankerWinner}
+            onClick={() => props.selectWager("banker-coordinates")}
+            style={{ background: props.baccaratState.bankerWinner }}
           >
             <div className="stats">
               <span>$ 0.00</span>
               <span>
-                {props.bankerFinalScore} <img src={userbanker} alt="" />
+                {props.baccaratState.bankerFinalScore}{" "}
+                <img src={userbanker} alt="" />
               </span>
             </div>
             <p>BANKER</p>
             <i id="bankerDivPosition"></i>
-            {props.bankerWinner && <h3>Winner</h3>}
+            {props.baccaratState.bankerWinner && <h3>Winner</h3>}
           </button>
 
           <button className="btn-5">
@@ -136,22 +140,28 @@ const Action = (props) => {
 
         <div className="coins-bg">
           <div className="coins-grid">
-            <button id="five" onClick={props.selectFive}>
+            <button id="five" onClick={() => props.selectAmount("five")}>
               <img src={coin5} alt="" />
             </button>
-            <button id="twenty-five" onClick={props.selectTwentyFive}>
+            <button
+              id="twenty-five"
+              onClick={() => props.selectAmount("twenty-five")}
+            >
               <img src={coin25} alt="" />
             </button>
-            <button id="hundred" onClick={props.selectHundred}>
+            <button id="hundred" onClick={() => props.selectAmount("hundred")}>
               <img src={coin100} alt="" />
             </button>
             <button
               id="two-hundred-fifty"
-              onClick={props.selectTwoHundredFifty}
+              onClick={() => props.selectAmount("two-hundred-fifty")}
             >
               <img src={coin250} alt="" />
             </button>
-            <button id="five-hundred" onClick={props.selectFiveHundred}>
+            <button
+              id="five-hundred"
+              onClick={() => props.selectAmount("five-hundred")}
+            >
               <img src={coin500} alt="" />
             </button>
           </div>
