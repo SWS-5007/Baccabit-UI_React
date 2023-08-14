@@ -10,9 +10,11 @@ import Wallet from "./Wallet";
 
 import "./styles.css";
 
-import { baccaratState, setBaccaratState } from "./Hooks/baccaratState";
+import { useBaccaratState } from "./Hooks/baccaratState";
 
 export const NewBaccaratComponent = () => {
+  const BaccaratHook = useBaccaratState();
+
   const handleWindowResize = () => {
     const { innerWidth, innerHeight } = window;
     // Set your desired scaling and translation values here
@@ -20,7 +22,7 @@ export const NewBaccaratComponent = () => {
     const translateX = (innerWidth - 1920 * scale) / 2;
     const translateY = (innerHeight - 1080 * scale) / 2;
 
-    setBaccaratState((prev) => ({
+    BaccaratHook.setBaccaratState((prev) => ({
       ...prev,
       scale: scale,
       translateX: translateX,
