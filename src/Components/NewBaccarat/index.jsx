@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import $ from "jquery";
+import _ from "lodash";
 
 import Action from "./Action";
 import Banker from "./Banker";
@@ -8,7 +10,32 @@ import Wallet from "./Wallet";
 
 import "./styles.css";
 
+import { baccaratState, setBaccaratState } from "./Hooks/baccaratState";
+
 export const NewBaccaratComponent = () => {
+  const handleWindowResize = () => {
+    const { innerWidth, innerHeight } = window;
+    // Set your desired scaling and translation values here
+    const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
+    const translateX = (innerWidth - 1920 * scale) / 2;
+    const translateY = (innerHeight - 1080 * scale) / 2;
+
+    setBaccaratState((prev) => ({
+      ...prev,
+      scale: scale,
+      translateX: translateX,
+      translateY: translateY,
+    }));
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
     <>
       <div className="newbaccarat-wrapper">
