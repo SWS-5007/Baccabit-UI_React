@@ -118,6 +118,11 @@ export const NewBaccaratComponent = () => {
         }}
       >
         <div className="newbaccarat-view">
+          <div className="newbaccarat-deposit-withdraw-btn-wrapper">
+            <button className="newbaccarat-deposit-btn">Deposit</button>
+            <button className="newbaccarat-withdraw-btn">Withdraw</button>
+          </div>
+
           <div id="chip-container"></div>
           <div className="newbaccarat-card-grid">
             <Player />

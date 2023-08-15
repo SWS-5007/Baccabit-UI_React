@@ -4,6 +4,29 @@
   align-items: center;
 }
 
+.newbaccarat-deposit-withdraw-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  border: 10px solid #4d030d;
+  border-radius: 30px;
+  padding: 5px 10px;
+  margin-bottom: 50px;
+}
+
+.newbaccarat-deposit-withdraw-btn-wrapper button {
+  background-color: #4d030d;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.newbaccarat-deposit-withdraw-btn-wrapper button:hover {
+  background-color: #670512;
+}
+
 .newbaccarat {
   display: flex;
   justify-content: center;
