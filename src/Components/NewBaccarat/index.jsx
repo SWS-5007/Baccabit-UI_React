@@ -286,7 +286,7 @@ export const NewBaccaratComponent = () => {
           // top: "50%",
           // left: "50%",
           // transform: `${`scale(${baccaratState.scale}) translate(-50%, -50%)`}`,
-          transform: `${`scale(${baccaratState.scaleX})`}`,
+          transform: `${`scale(${baccaratState.scale})`}`,
           // transform: `${`scale(${baccaratState.scaleX}, ${baccaratState.scaleY})`}`,
         }}
       >

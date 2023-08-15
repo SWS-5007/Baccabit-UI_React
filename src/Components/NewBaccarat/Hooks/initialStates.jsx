@@ -75,7 +75,7 @@ export const initialBaccaratState = {
   playerWinner: "",
   bankerWinner: "",
   gameTied: "",
-  scale: 1,
+  scale: 0.8,
   scaleX: 1,
   scaleY: 1,
   translateX: 0,

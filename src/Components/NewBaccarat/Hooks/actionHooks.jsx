@@ -118,13 +118,13 @@ export const selectWager = (wagerType, baccaratState, setBaccaratState) => {
   }
 
   const actionBgDiv = document.getElementById("action-bg");
-
   const actionBgDivRect = actionBgDiv && actionBgDiv.getBoundingClientRect();
+
   var itm = document.getElementById(baccaratState.coinType);
   const itmRect = itm && itm.getBoundingClientRect();
   const xOffset1 = (itmRect.left - actionBgDivRect.left) / baccaratState.scale;
   const yOffset1 = (itmRect.top - actionBgDivRect.top) / baccaratState.scale;
-
+  console.log("@@@@@@@@@@", xOffset1, yOffset1);
   setBaccaratState((prev) => ({
     ...prev,
     clearBtnShow: "show",
@@ -155,6 +155,7 @@ export const selectWager = (wagerType, baccaratState, setBaccaratState) => {
   const xOffset2 =
     (targetRect.left - actionBgDivRect.left) / baccaratState.scale;
   const yOffset2 = (targetRect.top - actionBgDivRect.top) / baccaratState.scale;
+  console.log("!!!!!!!!!!!!!!", xOffset2, yOffset2);
 
   const newOffsets = {
     x: xOffset2,

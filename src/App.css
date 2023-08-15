@@ -383,11 +383,10 @@ i#bankerDivPosition {
 
 .recent-stats-bg {
   background: url(../public/assets/stats-bg-new.svg);
-  width: 435px;
-  height: 115px;
-  background-repeat: no-repeat;
+  width: 490px;
+  height: 130px;
   background-size: cover;
-  background-size: 99%;
+  background-repeat: no-repeat;
   background-position: inherit;
 }
 
