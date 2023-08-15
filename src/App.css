@@ -16,6 +16,18 @@ body {
   src: url(../public/assets/fonts/eight-bit-dragon.otf);
 }
 
+.app {
+  width: 100vw;
+  height: 100vh;
+  background-color: #770314 !important;
+  box-shadow: inset 0px 0px 400px 100px rgba(0, 0, 0, 0.65);
+  background: url(../src/assets/items/baccabit_1.png);
+  background-size: contain;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .baccarat-view {
   background: url(../public/assets/bg-baccabit.png);
   background-size: cover;

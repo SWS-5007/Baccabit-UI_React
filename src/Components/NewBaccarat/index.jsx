@@ -26,28 +26,35 @@ export const NewBaccaratComponent = () => {
   const [baccaratState, setBaccaratState] = useState(initialBaccaratState);
   const GameRuleHook = useGameRuleHooks();
 
-  const handleWindowResize = () => {
-    const { innerWidth, innerHeight } = window;
-    // Set your desired scaling and translation values here
-    const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
-    const translateX = (innerWidth - 1920 * scale) / 2;
-    const translateY = (innerHeight - 1080 * scale) / 2;
+  useEffect(() => {
+    const handleWindowResize = () => {
+      const { innerWidth, innerHeight } = window;
+      // Set your desired scaling and translation values here
+      const scale = Math.min(innerWidth / 1920, innerHeight / 1080);
+      const scaleX = innerWidth / 1920;
+      const scaleY = innerWidth / 1080;
+      const translateX = (innerWidth - 1920 * scale) / 2;
+      const translateY = (innerHeight - 1080 * scale) / 2;
+      console.log("Calculating the Scale", scaleX, scaleY);
 
-    setBaccaratState((prev) => ({
-      ...prev,
-      scale: scale,
-      translateX: translateX,
-      translateY: translateY,
-    }));
-  };
+      setBaccaratState((prev) => ({
+        ...prev,
+        scale: scale,
+        scaleX: scaleX,
+        scaleY: scaleY,
+        translateX: translateX,
+        translateY: translateY,
+      }));
+    };
 
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleWindowResize);
+    handleWindowResize();
 
-  //   return () => {
-  //     window.removeEventListener("resize", handleWindowResize);
-  //   };
-  // }, []);
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   const handleSelectAmount = (type) => {
     const newType = getSelectAmount(type);
@@ -60,7 +67,6 @@ export const NewBaccaratComponent = () => {
 
   const getPlayerHands = (n) => {
     var playerhand = baccaratState.player;
-    console.log("2222222222", playerhand);
     var bankerhand = baccaratState.banker;
     var cardObj;
 
@@ -103,7 +109,6 @@ export const NewBaccaratComponent = () => {
   //=============Step 2=============
   const openAllCards = () => {
     const allOffset = cardOffsets;
-    console.log("11111111111", cardOffsets);
     var i = 0;
     for (var key in allOffset) {
       if (allOffset.hasOwnProperty(key)) {
@@ -278,33 +283,37 @@ export const NewBaccaratComponent = () => {
       <div
         id="newbaccarat"
         className="newbaccarat"
-        // style={{
-        //   position: "absolute",
-        //   top: "50%",
-        //   left: "50%",
-        //   transform: `${`scale(${scale}) translate(-50%, -50%)`}`,
-        // }}
+        style={{
+          // position: "absolute",
+          // top: "50%",
+          // left: "50%",
+          // transform: `${`scale(${baccaratState.scale}) translate(-50%, -50%)`}`,
+          transform: `${`scale(${baccaratState.scaleX})`}`,
+          // transform: `${`scale(${baccaratState.scaleX}, ${baccaratState.scaleY})`}`,
+        }}
       >
-        <div id="chip-container"></div>
-        <div className="newbaccarat-card-grid">
-          <Player />
-          <Banker />
-        </div>
+        <div className="newbaccarat-view">
+          <div id="chip-container"></div>
+          <div className="newbaccarat-card-grid">
+            <Player />
+            <Banker />
+          </div>
 
-        <div className="newbaccarat-footer-grid">
-          <Wallet
-            totalbet={baccaratState.betamount}
-            playerOverAllbalance={baccaratState.playerOverAllbalance}
-          />
-          <Action
-            baccaratState={baccaratState}
-            selectAmount={handleSelectAmount}
-            deal={deal}
-            rebet={rebet}
-            clearBet={clearBet}
-            handleSelectWager={handleSelectWager}
-          />
-          <Chat />
+          <div className="newbaccarat-footer-grid">
+            <Wallet
+              totalbet={baccaratState.betamount}
+              playerOverAllbalance={baccaratState.playerOverAllbalance}
+            />
+            <Action
+              baccaratState={baccaratState}
+              selectAmount={handleSelectAmount}
+              deal={deal}
+              rebet={rebet}
+              clearBet={clearBet}
+              handleSelectWager={handleSelectWager}
+            />
+            <Chat />
+          </div>
         </div>
       </div>
     </div>
