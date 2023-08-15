@@ -1,5 +1,9 @@
-import { cardOffsets, selectedWager } from "./initialStates";
-import { NewBaccaratComponent } from "..";
+import {
+  initialBaccaratState,
+  cardOffsets,
+  selectedWager,
+} from "./initialStates";
+import { useGameRuleHooks } from "./gameRuleHooks";
 
 export const getSelectAmount = (type) => {
   var coinValue;
@@ -124,7 +128,7 @@ export const selectWager = (wagerType, baccaratState, setBaccaratState) => {
   const itmRect = itm && itm.getBoundingClientRect();
   const xOffset1 = (itmRect.left - actionBgDivRect.left) / baccaratState.scale;
   const yOffset1 = (itmRect.top - actionBgDivRect.top) / baccaratState.scale;
-  console.log("@@@@@@@@@@", xOffset1, yOffset1);
+
   setBaccaratState((prev) => ({
     ...prev,
     clearBtnShow: "show",
@@ -155,7 +159,6 @@ export const selectWager = (wagerType, baccaratState, setBaccaratState) => {
   const xOffset2 =
     (targetRect.left - actionBgDivRect.left) / baccaratState.scale;
   const yOffset2 = (targetRect.top - actionBgDivRect.top) / baccaratState.scale;
-  console.log("!!!!!!!!!!!!!!", xOffset2, yOffset2);
 
   const newOffsets = {
     x: xOffset2,
@@ -190,5 +193,178 @@ export const selectWager = (wagerType, baccaratState, setBaccaratState) => {
   setBaccaratState((prev) => ({
     ...prev,
     betamount: finalbet,
+  }));
+};
+
+export const reset = (setBaccaratState) => {
+  setBaccaratState((prev) => ({
+    ...prev,
+    playerScore: initialBaccaratState.playerScore,
+    bankerScore: initialBaccaratState.bankerScore,
+    playerFinalScore: initialBaccaratState.playerFinalScore,
+    bankerFinalScore: initialBaccaratState.bankerFinalScore,
+    deck: initialBaccaratState.deck,
+    cardOffset: initialBaccaratState.cardOffset,
+    playerOverAllbalance: initialBaccaratState.playerOverAllbalance,
+    dealBtnShow: initialBaccaratState.dealBtnShow,
+    rebetBtnShow: initialBaccaratState.rebetBtnShow,
+    goBack: initialBaccaratState.goBack,
+    playerWinner: initialBaccaratState.playerWinner,
+    bankerWinner: initialBaccaratState.bankerWinner,
+    gameTied: initialBaccaratState.gameTied,
+  }));
+
+  cardOffsets.length = 0;
+};
+
+//=============Step 1=============
+export const shuffleCardsAndSetHands = (baccaratState, setBaccaratState) => {
+  const deck = shuffleDeck(baccaratState.deck);
+  const playerhand = [];
+  const bankerhand = [];
+  playerhand.push(deck.pop());
+  playerhand.push(deck.pop());
+
+  bankerhand.push(deck.pop());
+  bankerhand.push(deck.pop());
+
+  setBaccaratState(
+    (prev) => ({
+      ...prev,
+      player: playerhand,
+      banker: bankerhand,
+      cardOffset: cardOffsets,
+    }),
+    openAllCards(baccaratState, setBaccaratState)
+  );
+};
+
+//=============Step 2=============
+export const openAllCards = (baccaratState, setBaccaratState) => {
+  const allOffset = cardOffsets;
+  var i = 0;
+  for (var key in allOffset) {
+    if (allOffset.hasOwnProperty(key)) {
+      var obj = allOffset[key];
+      openOneByOne(i++, obj, baccaratState, setBaccaratState);
+    }
+  }
+};
+
+const getPlayerHands = (n, baccaratState) => {
+  var playerhand = baccaratState.player;
+  var bankerhand = baccaratState.banker;
+  var cardObj;
+
+  if (n === 0) {
+    cardObj = playerhand[0];
+  } else if (n === 1) {
+    cardObj = bankerhand[0];
+  } else if (n === 2) {
+    cardObj = playerhand[1];
+  } else if (n === 3) {
+    cardObj = bankerhand[1];
+  }
+  return cardObj;
+};
+
+// //=============Step 3=============
+const openOneByOne = (n, obj, baccaratState, setBaccaratState) => {
+  setTimeout(() => {
+    var cardObj = getPlayerHands(n, baccaratState); // get player cards
+    if (typeof cardObj === "undefined") {
+      return false;
+    }
+    var cardImage = document.createElement("img");
+    cardImage.style.position = "absolute";
+    cardImage.style.left = obj.x + "px";
+    cardImage.style.top = obj.y + "px";
+    cardImage.style.zIndex = 100006;
+    cardImage.setAttribute("src", "assets/cards/" + cardObj.f + ".png");
+    cardImage.setAttribute("id", "orig-card-" + n);
+    cardImage.setAttribute("height", "144px");
+    cardImage.setAttribute("width", "96px");
+
+    var hiddenImage = document.createElement("img");
+    hiddenImage.style.position = "absolute";
+    hiddenImage.style.left = obj.x + "px";
+    hiddenImage.style.top = obj.y + "px";
+    hiddenImage.style.zIndex = 100006;
+    hiddenImage.setAttribute("src", "assets/cards/hidden.png");
+    hiddenImage.setAttribute("id", "hidden-card-" + n);
+    hiddenImage.setAttribute("height", "144px");
+    hiddenImage.setAttribute("width", "96px");
+    hiddenImage.addEventListener(
+      "click",
+      flipCards(obj, cardImage, n, baccaratState, setBaccaratState)
+    );
+
+    var innerDiv = document.getElementById("chip-container");
+    innerDiv.appendChild(cardImage);
+    innerDiv.appendChild(hiddenImage);
+
+    goBack(obj, cardImage, n, baccaratState, setBaccaratState);
+
+    updatePlayerScore(n, baccaratState, setBaccaratState);
+  }, 800 * n);
+};
+
+const flipCards = (obj, cardImage, n, baccaratState, setBaccaratState) => {
+  const hiddenCard = $("#hidden-card-" + n);
+  const origCard = $("#orig-card-" + n);
+
+  hiddenCard.addClass("hidden-flip-cards");
+
+  setTimeout(() => {
+    hiddenCard.remove();
+    origCard.addClass("orig-flip-cards");
+  }, 200);
+
+  goBack(obj, cardImage, n, baccaratState, setBaccaratState);
+};
+
+const goBack = (obj, cardImage, n, baccaratState, setBaccaratState) => {
+  setTimeout(() => {
+    $("#card-" + n).remove(); // remove old cards
+    $("#hidden-card-" + n).remove(); // remove old cards
+    animate(obj, cardImage);
+
+    if (n === 3) {
+      setBaccaratState((prev) => ({
+        ...prev,
+        playerFinalScore: handScore(baccaratState.playerScore),
+        bankerFinalScore: handScore(baccaratState.bankerScore),
+      }));
+
+      useGameRuleHooks().gameRules(baccaratState, setBaccaratState);
+    }
+  }, 500);
+};
+
+const updatePlayerScore = (n, baccaratState, setBaccaratState) => {
+  var playerhand = baccaratState.player;
+  var bankerhand = baccaratState.banker;
+  var cardObj;
+  var newPlayerscrore = baccaratState.playerScore;
+  var newBankerscrore = baccaratState.bankerScore;
+
+  if (n === 0) {
+    cardObj = playerhand[0];
+    newPlayerscrore += cardObj.v;
+  } else if (n === 1) {
+    cardObj = bankerhand[0];
+    newBankerscrore += cardObj.v;
+  } else if (n === 2) {
+    cardObj = playerhand[1];
+    newPlayerscrore += cardObj.v;
+  } else if (n === 3) {
+    cardObj = bankerhand[1];
+    newBankerscrore += cardObj.v;
+  }
+
+  setBaccaratState((prev) => ({
+    ...prev,
+    playerScore: newPlayerscrore,
+    bankerScore: newBankerscrore,
   }));
 };
