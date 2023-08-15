@@ -7,7 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import { NewBaccarat } from "./Pages";
+import { NewBaccarat, SignUp } from "./Pages";
 
 import { Loader } from "./Components/Baccarat/Loader";
 import Baccarat from "./Components/Baccarat";
@@ -29,6 +29,7 @@ const App = () => {
     <div className="app">
       <Routes>
         {/* <Route exact path="/" element={<SignIn />} /> */}
+        <Route path="/signUp" element={<SignUp />} />
         <Route path="/baccarat" element={<Baccarat />} />
         <Route path="/" element={<NewBaccarat />} />
       </Routes>
