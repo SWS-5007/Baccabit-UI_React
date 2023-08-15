@@ -92,7 +92,6 @@ export const NewBaccaratComponent = () => {
 
     bankerhand.push(deck.pop());
     bankerhand.push(deck.pop());
-    console.log("000000000", playerhand);
 
     setBaccaratState(
       (prev) => ({
@@ -103,7 +102,6 @@ export const NewBaccaratComponent = () => {
       }),
       openAllCards()
     );
-    console.log("000000000", baccaratState.player);
   };
 
   //=============Step 2=============

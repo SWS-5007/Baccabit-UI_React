@@ -39,7 +39,7 @@
 .newbaccarat-footer-grid {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   text-align: center;
   width: 100%;
 }

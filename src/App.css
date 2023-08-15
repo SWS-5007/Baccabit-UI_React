@@ -176,13 +176,12 @@ button.btn-3 {
 }
 
 button.btn-1 {
-  width: 113px;
-  height: 165px;
+  width: 100px;
+  height: 140px;
   background: url(../public/assets/action-btn-1.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   position: relative;
-  left: -4px;
 }
 
 button.btn-2 .stats span {
@@ -212,19 +211,20 @@ button.btn-4 .stats span {
 }
 
 button.btn-2 {
-  width: 220px;
-  height: 165px;
+  width: 190px;
+  height: 140px;
   background: url(../public/assets/action-btn-2.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   position: relative;
+  margin-right: 5px;
 }
 
 button.btn-3 {
   /* width: 148px;
   height: 140px; */
-  width: 167px;
-  height: 140px;
+  width: 150px;
+  height: 125px;
   background: url(../public/assets/action-btn-3.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -232,28 +232,29 @@ button.btn-3 {
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-  margin-left: 7px;
   z-index: 9;
+  margin-left: -2px;
+  border-top-left-radius: 70px;
+  border-top-right-radius: 70px;
 }
 
 button.btn-4 {
-  width: 201px;
-  height: 165px;
+  width: 190px;
+  height: 140px;
   background: url(../public/assets/action-btn-4.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   position: relative;
-  margin-left: 4px;
+  margin-left: 5px;
 }
 
 button.btn-5 {
-  width: 113px;
-  height: 165px;
+  width: 100px;
+  height: 140px;
   background: url(../public/assets/action-btn-5.png);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   position: relative;
-  right: -4px;
 }
 
 .action-bg * {
@@ -264,25 +265,25 @@ i#tieDivPosition {
   position: absolute;
   width: 40px;
   height: 40px;
-  bottom: 45px;
+  bottom: 30px;
   /* left: -15%; */
   /* bottom: 75px; */
 }
 
 i#playerDivPosition {
   position: absolute;
-  left: 10%;
+  left: 20px;
   width: 40px;
   height: 40px;
-  top: 70px;
+  top: 50px;
 }
 
 i#bankerDivPosition {
   position: absolute;
-  right: 18%;
+  right: 25px;
   width: 40px;
   height: 40px;
-  top: 70px;
+  top: 50px;
 }
 
 .winner {
@@ -319,20 +320,37 @@ i#bankerDivPosition {
 /***************** COINS *****************/
 
 .coins-bg {
-  background: url(../public/assets/coin-bg.png);
-  width: 451px;
-  height: 110px;
+  display: flex;
+  align-items: center;
+  width: 400px;
+  height: 85px;
+  margin: 0px auto;
+  margin-top: 20px;
+  border-radius: 30px;
+  background-color: #051216;
+  /* background: url(../public/assets/coin-bg.png);
+  width: 420px;
+  height: 95px;
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0px auto;
   margin-top: 20px;
+  border-radius: 40px; */
 }
 
 .coins-grid {
   display: flex;
+  background-color: #380911;
+  border-radius: 20px;
+  width: calc(100% - 20px);
+  height: 70px;
+  margin: auto;
+  gap: 10px;
+  justify-content: center;
+  /* display: flex;
   padding: 10px 30px;
   justify-content: space-around;
-  gap: 10px;
+  gap: 10px; */
 }
 
 .coins-grid button {
@@ -342,7 +360,7 @@ i#bankerDivPosition {
   transition: all 0.5s;
   border-radius: 100%;
   padding: 0;
-  width: 20%;
+  width: 14%;
 }
 
 .coins-grid button:hover {
