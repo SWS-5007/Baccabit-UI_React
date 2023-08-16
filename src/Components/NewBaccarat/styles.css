@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .newbaccarat-deposit-withdraw-btn-wrapper {
@@ -21,6 +22,10 @@
   padding: 10px 30px;
   font-size: 20px;
   line-height: 25px;
+  border: none;
+  color: white;
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
 }
 
 .newbaccarat-deposit-withdraw-btn-wrapper button:hover {
@@ -65,4 +70,5 @@
   align-items: flex-end;
   text-align: center;
   width: 100%;
+  margin-top: 100px;
 }
