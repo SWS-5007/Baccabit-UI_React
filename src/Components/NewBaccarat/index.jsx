@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import $ from "jquery";
 import _ from "lodash";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
-
-import { X, Wallet as WalletIcon, Clipboard2 } from "react-bootstrap-icons";
 
 import Action from "./Action";
 import Banker from "./Banker";
@@ -15,6 +10,7 @@ import Wallet from "./Wallet";
 
 import "./styles.css";
 
+import DepositWithdrawTipModal from "./Modal";
 import { useModal } from "../../hook/useModal";
 
 import { initialBaccaratState, cardOffsets } from "./Hooks/initialStates";
@@ -37,11 +33,6 @@ export const NewBaccaratComponent = () => {
 
   const [baccaratState, setBaccaratState] = useState(initialBaccaratState);
   const GameRuleHook = useGameRuleHooks();
-
-  const handleClose = () => ViewDepositModal.setOpen(false);
-  const handleShow = () => {
-    ViewDepositModal.setOpen(true);
-  };
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -119,7 +110,8 @@ export const NewBaccaratComponent = () => {
 
   const [walletType, setWalletType] = useState("deposit");
 
-  const handleDWTBtn = (type) => {
+  const handleShow = (type) => {
+    ViewDepositModal.setOpen(true);
     setWalletType(type);
   };
 
@@ -141,13 +133,13 @@ export const NewBaccaratComponent = () => {
           <div className="newbaccarat-deposit-withdraw-btn-wrapper">
             <button
               className="newbaccarat-deposit-btn"
-              onClick={() => handleShow()}
+              onClick={() => handleShow("deposit")}
             >
               Deposit
             </button>
             <button
               className="newbaccarat-withdraw-btn"
-              onClick={() => handleShow()}
+              onClick={() => handleShow("withdraw")}
             >
               Withdraw
             </button>
@@ -177,99 +169,11 @@ export const NewBaccaratComponent = () => {
         </div>
       </div>
 
-      <Modal
-        className="deposit-withdraw-modal"
-        show={ViewDepositModal.open}
-        onHide={handleClose}
-        style={{ backgroundColor: "transparent !important" }}
-      >
-        <div className="deposit-modal-wrapper">
-          <div className="deposit-modal-header">
-            <div className="deposit-modal-wallet-box">
-              <WalletIcon className="deposit-modal-walletIcon" />
-              Wallet
-            </div>
-
-            <button className="deposit-modal-closebtn" onClick={handleClose}>
-              <X className="deposit-modal-closeIcon" />
-            </button>
-          </div>
-
-          <div className="deposit-modal-type-btn-box">
-            <button
-              className={
-                walletType === "deposit"
-                  ? "deposit-modal-type-btn-selected"
-                  : ""
-              }
-              onClick={() => handleDWTBtn("deposit")}
-            >
-              Deposit
-            </button>
-
-            <button
-              className={
-                walletType === "withdraw"
-                  ? "deposit-modal-type-btn-selected"
-                  : ""
-              }
-              onClick={() => handleDWTBtn("withdraw")}
-            >
-              Withdraw
-            </button>
-
-            <button
-              className={
-                walletType === "tip" ? "deposit-modal-type-btn-selected" : ""
-              }
-              onClick={() => handleDWTBtn("tip")}
-            >
-              Tip
-            </button>
-          </div>
-
-          <div className="deposit-modal-currency-network-btn-box">
-            <div>
-              Currency
-              <Form.Select size="sm">
-                <option>USDT</option>
-              </Form.Select>
-            </div>
-
-            <div>
-              Network
-              <Form.Select size="sm">
-                <option>ETH</option>
-                <option>BEEP20</option>
-              </Form.Select>
-            </div>
-          </div>
-
-          <div className="deposit-modal-currency-wallet-address-wrapper">
-            <span
-              style={{ fontSize: "14px", color: "white", paddingLeft: "20px" }}
-            >
-              Your USDT deposit address
-            </span>
-
-            <div className="deposit-modal-currency-wallet-address-box">
-              <span>0xdac17f9580d2ee523a220606994597c13d831ec7</span>
-              <button className="deposit-modal-wallet-address-copy-btn">
-                <Clipboard2 className="deposit-modal-wallet-address-copy-icon" />
-              </button>
-            </div>
-          </div>
-
-          <div className="deposit-modal-qrcode-wrapper">
-            <div className="deposit-modal-qrcode-box"></div>
-
-            <div className="deposit-modal-qrcode-text">
-              Only send USDT on the ETH network to this address
-              <br /> <br />2 confirmations required
-            </div>
-          </div>
-        </div>
-      </Modal>
+      <DepositWithdrawTipModal
+        {...ViewDepositModal}
+        walletType={walletType}
+        setWalletType={setWalletType}
+      />
     </div>
   );
 };

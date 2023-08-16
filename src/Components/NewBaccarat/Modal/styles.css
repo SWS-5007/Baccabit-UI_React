@@ -1,0 +1,252 @@
+.deposit-withdraw-modal .modal-dialog .modal-content {
+  background-color: transparent !important;
+}
+
+.deposit-modal-wrapper {
+  padding: 10px 20px;
+  background-color: #5a020f;
+  border: 10px solid #4c030d;
+  border-radius: 30px;
+  color: white !important;
+}
+
+.deposit-modal-wrapper * {
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
+}
+
+.deposit-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deposit-modal-type-btn-box {
+  display: flex;
+  gap: 10px;
+  width: 80%;
+  margin: auto;
+  margin-top: 30px;
+  background-color: #790717;
+  border: 10px solid #4c030d;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.deposit-modal-type-btn-box button {
+  flex: 1;
+  padding: 5px 0px;
+  border-radius: 30px;
+  font-size: 14px;
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+
+.deposit-modal-type-btn-box button:hover {
+  background-color: #5a020f;
+}
+
+.deposit-modal-type-btn-selected {
+  background-color: #5a020f !important;
+}
+
+.deposit-modal-depositcontent {
+  display: flex;
+  flex-direction: column;
+}
+
+.deposit-modal-currency-network-btn-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+.deposit-modal-currency-network-btn-box div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+}
+
+.deposit-modal-currency-network-btn-box select {
+  color: white;
+  border: 8px solid #4c030d;
+  border-radius: 25px;
+  height: 55px;
+  background-color: #790717;
+  font-size: 14px;
+  padding-left: 20px;
+}
+
+.deposit-modal-currency-network-btn-box select:focus {
+  box-shadow: none;
+  border-color: #4c030d;
+}
+
+.deposit-modal-wallet-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: white;
+}
+
+.deposit-modal-walletIcon {
+  font-size: 15px;
+  color: white;
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
+}
+
+.deposit-modal-closebtn {
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+}
+
+.deposit-modal-closebtn :hover {
+  border-radius: 50%;
+  background-color: #670512 !important;
+}
+
+.deposit-modal-closeIcon {
+  font-size: 25px;
+  color: white;
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
+}
+
+.deposit-modal-currency-wallet-address-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 55px;
+  padding: 10px 15px;
+  font-size: 12px;
+  color: white;
+  border: 8px solid #4c030d;
+  border-radius: 25px;
+  background-color: #790717;
+  margin-top: 5px;
+}
+
+.deposit-modal-currency-wallet-address-wrapper {
+  margin-top: 40px;
+}
+
+.deposit-modal-wallet-address-copy-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.deposit-modal-wallet-address-copy-icon {
+  font-size: 18px;
+  color: white;
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
+}
+
+.deposit-modal-qrcode-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.deposit-modal-qrcode-box {
+  width: 130px;
+  height: 100px;
+  background: url(../../../assets/items/qrcode.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 8px solid #4c030d;
+}
+
+.deposit-modal-qrcode-text {
+  font-size: 14px;
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
+}
+
+.deposit-modal-currency-balance {
+  width: 50% !important;
+  margin: auto;
+  color: white !important;
+  border: 8px solid #4c030d !important;
+  border-radius: 25px !important;
+  height: 55px !important;
+  background-color: #790717 !important;
+  font-size: 14px !important;
+  padding-left: 20px !important;
+  margin-top: 20px !important;
+}
+
+.deposit-modal-currency-balance:focus {
+  box-shadow: none !important;
+  border-color: #4c030d !important;
+}
+
+.deposit-modal-BTC-address-wrapper {
+  margin-top: 30px;
+}
+
+.deposit-modal-BTC-address-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  height: 55px;
+  padding: 10px 15px;
+  font-size: 10px;
+  color: white;
+  border: 8px solid #4c030d;
+  border-radius: 25px;
+  background-color: #790717;
+  margin-top: 5px;
+}
+
+.deposit-modal-BTC-amount-wrapper {
+  margin-top: 20px;
+}
+
+.deposit-modal-BTC-amount-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  height: 55px;
+  padding: 10px 15px;
+  font-size: 10px;
+  color: white;
+  border: 8px solid #4c030d;
+  border-radius: 25px;
+  background-color: #790717;
+  margin-top: 5px;
+}
+
+.deposit-modal-BTC-MAK-btn {
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  background-color: #4c030d;
+}
+
+.deposit-modal-BTC-MAK-btn:hover {
+  background-color: #5a020f;
+}
+
+.deposit-modal-withdrawal-text {
+  margin-top: 20px;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 40px;
+}
