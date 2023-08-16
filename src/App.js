@@ -13,6 +13,7 @@ import { Loader } from "./Components/Baccarat/Loader";
 import Baccarat from "./Components/Baccarat";
 import { SignIn } from "./Components/SignIn";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
 const App = () => {
@@ -28,7 +29,7 @@ const App = () => {
   return (
     <div className="app">
       <Routes>
-        {/* <Route exact path="/" element={<SignIn />} /> */}
+        <Route exact path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/baccarat" element={<Baccarat />} />
         <Route path="/" element={<NewBaccarat />} />

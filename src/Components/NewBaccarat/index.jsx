@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import $ from "jquery";
 import _ from "lodash";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+
+import { X, Wallet as WalletIcon } from "react-bootstrap-icons";
 
 import Action from "./Action";
 import Banker from "./Banker";
@@ -9,6 +14,8 @@ import Player from "./Player";
 import Wallet from "./Wallet";
 
 import "./styles.css";
+
+import { useModal } from "../../hook/useModal";
 
 import { initialBaccaratState, cardOffsets } from "./Hooks/initialStates";
 import {
@@ -26,8 +33,15 @@ import {
 import { useGameRuleHooks } from "./Hooks/gameRuleHooks";
 
 export const NewBaccaratComponent = () => {
+  const ViewDepositModal = useModal(false);
+
   const [baccaratState, setBaccaratState] = useState(initialBaccaratState);
   const GameRuleHook = useGameRuleHooks();
+
+  const handleClose = () => ViewDepositModal.setOpen(false);
+  const handleShow = () => {
+    ViewDepositModal.setOpen(true);
+  };
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -119,8 +133,18 @@ export const NewBaccaratComponent = () => {
       >
         <div className="newbaccarat-view">
           <div className="newbaccarat-deposit-withdraw-btn-wrapper">
-            <button className="newbaccarat-deposit-btn">Deposit</button>
-            <button className="newbaccarat-withdraw-btn">Withdraw</button>
+            <button
+              className="newbaccarat-deposit-btn"
+              onClick={() => handleShow()}
+            >
+              Deposit
+            </button>
+            <button
+              className="newbaccarat-withdraw-btn"
+              onClick={() => handleShow()}
+            >
+              Withdraw
+            </button>
           </div>
 
           <div id="chip-container"></div>
@@ -146,6 +170,52 @@ export const NewBaccaratComponent = () => {
           </div>
         </div>
       </div>
+
+      <Modal
+        className="deposit-withdraw-modal"
+        show={ViewDepositModal.open}
+        onHide={handleClose}
+        style={{ backgroundColor: "transparent !important" }}
+      >
+        <div className="deposit-modal-wrapper">
+          <div className="deposit-modal-header">
+            <div className="deposit-modal-wallet-box">
+              <WalletIcon className="deposit-modal-walletIcon" />
+              Wallet
+            </div>
+
+            <button className="deposit-modal-closebtn">
+              <X className="deposit-modal-closeIcon" />
+            </button>
+          </div>
+
+          <div className="deposit-modal-type-btn-box">
+            <button>Deposit</button>
+            <button>Withdraw</button>
+            <button>Tip</button>
+          </div>
+
+          <div className="deposit-modal-currency-network-btn-box">
+            <div>
+              Currency
+              <Form.Select size="sm">
+                <option>USDT</option>
+                <option>ETH</option>
+                <option>BTN</option>
+              </Form.Select>
+            </div>
+
+            <div>
+              Network
+              <Form.Select size="sm">
+                <option>USDT</option>
+                <option>ETH</option>
+                <option>BTN</option>
+              </Form.Select>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

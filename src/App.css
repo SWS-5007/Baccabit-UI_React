@@ -26,7 +26,7 @@ body {
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  color: white;
+  color: white !important;
 }
 
 .baccarat-view {
@@ -641,4 +641,26 @@ div#coins-container .currency-btn3:nth-child(10){
 
 .robotoFF {
   font-family: "Roboto Mono", monospace;
+}
+
+.dfacjc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.d_f {
+  display: flex;
+}
+
+.f_d_c {
+  flex-direction: column;
+}
+
+.a_c {
+  align-items: center;
+}
+
+.j_c {
+  justify-content: center;
 }

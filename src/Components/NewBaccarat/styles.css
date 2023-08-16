@@ -17,8 +17,8 @@
 
 .newbaccarat-deposit-withdraw-btn-wrapper button {
   background-color: #4d030d;
-  border-radius: 25px;
-  padding: 10px 20px;
+  border-radius: 30px;
+  padding: 10px 30px;
   font-size: 20px;
   line-height: 25px;
 }
@@ -65,4 +65,87 @@
   align-items: flex-end;
   text-align: center;
   width: 100%;
+}
+
+.deposit-withdraw-modal .modal-dialog .modal-content {
+  background-color: transparent !important;
+}
+
+.deposit-modal-wrapper {
+  padding: 10px 20px;
+  background-color: #5a020f;
+  border: 10px solid #4c030d;
+  border-radius: 30px;
+  color: white !important;
+}
+
+.deposit-modal-wrapper * {
+  color: white !important;
+}
+
+.deposit-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.deposit-modal-type-btn-box {
+  display: flex;
+  gap: 10px;
+  width: 80%;
+  margin: auto;
+  margin-top: 30px;
+  background-color: #790717;
+  border: 10px solid #4c030d;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.deposit-modal-type-btn-box button {
+  flex: 1;
+  padding: 5px 0px;
+  border-radius: 30px;
+  background-color: #5a020f;
+  font-size: 14px;
+  border: none;
+}
+
+.deposit-modal-currency-network-btn-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.deposit-modal-wallet-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: white;
+}
+
+.deposit-modal-walletIcon {
+  font-size: 15px;
+  color: white;
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
+}
+
+.deposit-modal-closebtn {
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+}
+
+.deposit-modal-closebtn :hover {
+  border-radius: 50%;
+  background-color: #670512 !important;
+}
+
+.deposit-modal-closeIcon {
+  font-size: 25px;
+  color: white;
+  text-shadow: 2px 0 #05090a, -2px 0 #05090a, 0 2px #05090a, 0 -2px #05090a,
+    2px 2px #05090a, -2px -2px #05090a, 2px -2px #05090a, -2px 2px #05090a;
 }
