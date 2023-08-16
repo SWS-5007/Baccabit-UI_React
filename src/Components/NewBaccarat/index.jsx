@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-import { X, Wallet as WalletIcon } from "react-bootstrap-icons";
+import { X, Wallet as WalletIcon, Clipboard2 } from "react-bootstrap-icons";
 
 import Action from "./Action";
 import Banker from "./Banker";
@@ -117,6 +117,12 @@ export const NewBaccaratComponent = () => {
     selectWager(wagerType, baccaratState, setBaccaratState);
   };
 
+  const [walletType, setWalletType] = useState("deposit");
+
+  const handleDWTBtn = (type) => {
+    setWalletType(type);
+  };
+
   return (
     <div className="newbaccarat-wrapper">
       <div
@@ -184,15 +190,42 @@ export const NewBaccaratComponent = () => {
               Wallet
             </div>
 
-            <button className="deposit-modal-closebtn">
+            <button className="deposit-modal-closebtn" onClick={handleClose}>
               <X className="deposit-modal-closeIcon" />
             </button>
           </div>
 
           <div className="deposit-modal-type-btn-box">
-            <button>Deposit</button>
-            <button>Withdraw</button>
-            <button>Tip</button>
+            <button
+              className={
+                walletType === "deposit"
+                  ? "deposit-modal-type-btn-selected"
+                  : ""
+              }
+              onClick={() => handleDWTBtn("deposit")}
+            >
+              Deposit
+            </button>
+
+            <button
+              className={
+                walletType === "withdraw"
+                  ? "deposit-modal-type-btn-selected"
+                  : ""
+              }
+              onClick={() => handleDWTBtn("withdraw")}
+            >
+              Withdraw
+            </button>
+
+            <button
+              className={
+                walletType === "tip" ? "deposit-modal-type-btn-selected" : ""
+              }
+              onClick={() => handleDWTBtn("tip")}
+            >
+              Tip
+            </button>
           </div>
 
           <div className="deposit-modal-currency-network-btn-box">
@@ -200,18 +233,39 @@ export const NewBaccaratComponent = () => {
               Currency
               <Form.Select size="sm">
                 <option>USDT</option>
-                <option>ETH</option>
-                <option>BTN</option>
               </Form.Select>
             </div>
 
             <div>
               Network
               <Form.Select size="sm">
-                <option>USDT</option>
                 <option>ETH</option>
-                <option>BTN</option>
+                <option>BEEP20</option>
               </Form.Select>
+            </div>
+          </div>
+
+          <div className="deposit-modal-currency-wallet-address-wrapper">
+            <span
+              style={{ fontSize: "14px", color: "white", paddingLeft: "20px" }}
+            >
+              Your USDT deposit address
+            </span>
+
+            <div className="deposit-modal-currency-wallet-address-box">
+              <span>0xdac17f9580d2ee523a220606994597c13d831ec7</span>
+              <button className="deposit-modal-wallet-address-copy-btn">
+                <Clipboard2 className="deposit-modal-wallet-address-copy-icon" />
+              </button>
+            </div>
+          </div>
+
+          <div className="deposit-modal-qrcode-wrapper">
+            <div className="deposit-modal-qrcode-box"></div>
+
+            <div className="deposit-modal-qrcode-text">
+              Only send USDT on the ETH network to this address
+              <br /> <br />2 confirmations required
             </div>
           </div>
         </div>
